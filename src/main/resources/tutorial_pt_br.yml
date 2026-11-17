@@ -1,0 +1,13 @@
+title: 'Painéis'
+permission: vystormboards.admin
+pages:
+  - title: 'Pendurar um painel'
+    text: |
+      Olhe para a parede onde ficará o canto superior esquerdo e use /boards create.
+  - title: 'Editar páginas'
+    text: |
+      /boards abre o editor: imagens, texto ao vivo, cabeças, botões e várias páginas.
+  - title: 'Rankings e enquetes'
+    text: |
+      Mostre rankings com /boards top e deixe votar direto no painel.
+      Digite /boards help para ver todos os comandos.

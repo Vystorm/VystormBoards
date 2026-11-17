@@ -1,0 +1,237 @@
+# Русский — UTF-8. Keep keys, placeholders and formatting tokens unchanged.
+usage-create: <gray>/boards create NAME WIDTH HEIGHT – Посмотрите на блок стены, который должен быть верхним левым углом.
+usage-create-console: <gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – настенный блок верхнего левого
+  угла и сторона, обращенная к доске.
+usage-remove: <gray>/boards remove NAME
+denied: <red>У вас нет на это разрешения.
+player-only: <red>Запустите это в игре.
+reloaded: <green>Перезагрузка Vystorm плат ({count} плат).
+list-header: '<gold>Советы ({count}):'
+list-entry: <gray>- <yellow>{name}</yellow> {size} на {where}
+bad-name: <red>Имена могут использовать a-z, 0-9, _ и - (max). 32).
+bad-size: <red>Ширина и высота должны составлять от 1 до 16 кадров.
+exists: <red>Доска под названием {name} уже существует.
+look-at-wall: <red>Посмотрите на стену сбоку (максимум). В 10 кварталах отсюда.
+no-room: '<red>Нет места под номером {x} {y} {z}: требуется сплошная стена сзади и свободное пространство спереди.'
+created: <green>Совет <yellow>{name}</yellow> ({size}) созданный. Редактировать в boards.yml, затем /boards reload.
+removed: <green>Снята плата {name} ({frames} кадр).
+unknown-board: <red>Никакой платы {name}.
+failed: <red>Это не сработало; подробности находятся в журнале сервера.
+info: <gold>{name}</gold> <gray>{size} кадров ({pixels} px) при {where} - {elements} элементах, {pages} страницах, {clicks}
+  областях кликов, {mode}, картах {maps}
+info-per-player: нарисованный на игрока
+info-shared: Одна фотография для всех
+click-cooldown: <red>Еще нет - попробуйте еще раз в {seconds} с.
+top-disabled: <red>Рейтинги выключены (leaderboards.enabled в config.yml).
+top-list-header: <gold>Рейтинги на досках ({count}):</gold> <gray>Нажмите один, чтобы увидеть первые места
+top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> {players} игроков
+top-unknown: <red>Неизвестный источник {source}. Используйте stat:NAME, заполнитель:%...% или объектив:NAME.
+top-header: <gold>{name}</gold> <dark_gray>({source}, {players} игроков)
+top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
+top-empty: <gray>Ценностей пока нет — они собираются, пока игроки онлайн.
+top-reset-ask: <yellow>Забыли все сохраненные значения {source}?
+top-reset: <green>Рейтинг {source} сбрасывается; он снова заполняется от онлайн-игроков и сохраняет статистику.
+top-reset-objective: <red>Рейтинги Scoreboard приходят в прямом эфире с табло; сбросить цель там.
+rankings-header: '<gold>Рейтинги {player}:'
+rankings-none: <gray>Пока нет ни одного рейтинга.
+rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'
+menu-rankings: <gold>Рейтинги {player}
+menu-rankings-line: '<gray>{name}: <yellow>#{rank}</yellow> <dark_gray>({value})'
+menu-rankings-click: '<dark_gray>Click: Показать в чате'
+vote-cast: <green>Вы проголосовали за <yellow>{option}</yellow>.
+vote-changed: <green>Ваш голос теперь идет <yellow>{option}</yellow>.
+vote-same: <gray>Вы уже проголосовали за <yellow>{option}</yellow>.
+vote-locked: <red>Вы уже проголосовали за {option}Голоса изменить нельзя.
+vote-closed: <red>Этот опрос закрыт.
+poll-disabled: <red>Опросы отключены (polls.enabled в config.yml).
+poll-bad-id: <red>Опросные идентификаторы могут использовать a-z, 0-9, _ и - (максимум). 32).
+poll-unknown: <red>Ни одного опроса {poll} (без голосов и кнопки доски).
+poll-list-header: <gold>Опросы ({count}):</gold> <gray>Нажмите один для результатов
+poll-list-empty: '<gray>Опросов пока нет. Добавьте область клика с голосом: «Опрос: вариант» на доску.'
+poll-list-entry: <gray>- <yellow>{poll}</yellow> - {votes} голосов, {state}
+poll-header: <gold>Опрос {poll}</gold> <gray>- {votes} голосов, {state}
+poll-option: <gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)
+poll-state-open: открытый
+poll-state-closed: закрытый
+poll-closed: <green>Опрос {poll} закрыт - кнопки доски больше не принимают голоса.
+poll-opened: <green>Опрос {poll} снова открыт.
+poll-reset-ask: <yellow>Удалить все {votes} голосов по опросу {poll}?
+poll-reset: <green>Опрос {poll} сброс ({votes} голос удалены).
+button-confirm: <red>[Подтвердить сброс]
+button-close: <yellow>[Закрыть опрос]
+button-open: <green>[Открыть опрос]
+button-reset: <red>[Сбросить голоса]
+button-refresh: <gray>[Обновить]
+render-status: '<gray>Доски оформляются как <gold>{mode}</gold> (Режим исполнения: {configured}). <dark_gray>{reason}'
+render-stats: <gray>Пакетные стены <white>{walls}</white>Зрители <white>{viewers}</white>Только клиентские фреймы <white>{frames}</white>посланный
+  <white>{spawns}</white> каркасные нересты и <white>{maps}</white> обновление карты ({pixels} пикселей, около {kib} KiB до
+  сжатия), <white>{clicks}</white> клики; идентификаторы в использовании {mapids} карт / {entityids} кадров; Ядро клеща {avg}
+  мкс avg, {max} мкс max.
+countdown-days: '{days}d'
+poll-deadline: '<gray>Опрос {poll} крайний срок: {time}'
+poll-deadline-none: <gray>Опрос {poll} не имеет срока.
+poll-deadline-invalid: <red>Укажите будущую дату/время, например 2026-12-24T18:00 (время сервера), или clear.
+commands:
+  boards:
+    description: 'Рекламные щиты: создавать, перечислять и удалять доски, рейтинги и опросы'
+    aliases: []
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Редактор страниц"
+        args:
+          name: NAME
+      create:
+        name: create
+        aliases: []
+        description: Повесьте новую доску на стену, на которую вы смотрите (верхний левый угол); из консоли с миром, положением
+          и лицом
+        args:
+          name: NAME
+          width: WIDTH
+          height: HEIGHT
+          world: WORLD
+          x: XX
+          y: Y
+          z: Z
+          facing: north|east|south|west
+      info:
+        name: info
+        aliases: []
+        description: Размер, положение, элементы, страницы и области кликов доски
+        args:
+          name: NAME
+      list:
+        name: list
+        aliases: []
+        description: Все доски с размером и положением
+      deadline:
+        name: deadline
+        aliases: []
+        description: Показать или установить срок опроса по времени сервера; clear удаляет срок
+        args:
+          id: ID
+          time: ВРЕМЯ|clear
+      poll:
+        name: poll
+        aliases: []
+        description: Все опросы или результаты одного опроса; закрыть, открыть или сбросить его
+        args:
+          id: ID
+          action: закрыть|открытый|сбросить
+          confirm: подтвердить
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Гостевая книга: список, удалить запись или очистить"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: photos
+        aliases: []
+        description: "Сделать табло слайд-шоу из фото Snapshot"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: reload
+        aliases: []
+        description: Перезагрузка конфигураций, плат и языковых файлов
+      remove:
+        name: remove
+        aliases: []
+        description: Удалить доску и ее рамы элементов
+        args:
+          name: NAME
+      render:
+        name: render
+        aliases: []
+        description: Режим рендера в использовании и счетчики пакетов
+      top:
+        name: top
+        aliases: []
+        description: Рейтинги в использовании, первые места одного источника или сброс сохраненных значений
+        args:
+          source: SOURCE
+          action: сбросить
+          confirm: подтвердить
+    values:
+      close: закрыть
+      open: открытый
+      reset: сбросить
+      confirm: подтвердить
+navigation-invalid: <red>Эта кнопка страницы имеет неверную цель или доска не имеет страниц.
+navigation-auto: <green>Автоматическая ротация страниц возобновлена.
+navigation-page: <gray>Страница {page} из {pages}.
+feature-off: <red>Эта функция отключена на этом сервере.
+
+# Free feature release: editor
+editor:
+  title: "Редактор страниц"
+  usage: "Используйте /boards edit ИМЯ."
+  page: "Страница {page}"
+  elements: "Элементов: {count}"
+  add-page: "Добавить пустую страницу"
+  interval: "Смена каждые {seconds} с"
+  interval-prompt: "Секунд на страницу (1–3600)"
+  save: "Проверить и применить"
+  discard: "Отменить черновик"
+  element-hint: "Нажать: изменить текст. Shift-клик: удалить."
+  back: "К страницам"
+  add-text: "Добавить текст"
+  text-prompt: "Текст (до 240 символов)"
+  duplicate: "Дублировать страницу"
+  earlier: "Переместить раньше"
+  later: "Переместить позже"
+  remove-page: "Удалить страницу"
+  preview: "Предпросмотр на личной карте"
+  preview-item: "Предпросмотр черновика"
+  preview-ready: "<green>Возьмите карту. Предпросмотр виден только вам две минуты. /boards edit возвращает к черновику."
+  confirm: "Применить черновик? Внешние изменения boards.yml заблокируют сохранение."
+  save-saved: "<green>Доска сохранена."
+  save-conflict: "<red>boards.yml изменён. Откройте редактор заново; ничего не перезаписано."
+  save-failed: "<red>Не удалось сохранить. Черновик остаётся открыт."
+  invalid: "<red>Неверное значение или лимит: 32 страницы, по 45 элементов."
+  inventory-full: "<red>Освободите место для карты."
+  unavailable: "<red>Редактор или предпросмотр недоступен. Проверьте доску и журнал."
+guestbook:
+  title: "Гостевая книга"
+  question: "Оставьте короткое сообщение (до 60 символов)."
+  written: "<green>✍ Спасибо – ваша запись на табло."
+  empty: "<red>Сначала напишите пару слов."
+  cooldown: "<red>Снова писать можно через {seconds} с."
+  disabled: "<gray>Гостевые книги на этом сервере отключены."
+  none: "<gray>Пока ни в одной гостевой книге нет записей."
+  list-entry: "<gray>- <yellow>{book}</yellow> – записей: {count}"
+  empty-book: "<gray>Гостевая книга {book} пуста."
+  header: "<gold>Гостевая книга {book} ({count}, сначала новые):"
+  line: "<gray>{number}. <white>{player}</white>: {text}"
+  remove-button: "<red>[удалить]"
+  removed: "<green>Запись {number} удалена из {book}."
+  no-entry: "<red>В {book} нет записи {number}."
+  cleared: "<green>{book} очищена (записей: {count})."
+photos-set: "<green>Табло {name} теперь показывает фото Snapshot ({source})."
+photos-usage: "<gray>/boards photos ИМЯ [gallery | newest | player:ИМЯ]"
+
+panel:
+  pages: "Страницы"
+  edit-page: "Изменить страницу"
+  empty: "На этой странице нет элементов."
+  element: "Элемент {number}"
+  type: "Тип"
+  type-text: "Текст"
+  type-image: "Изображение"
+  type-rect: "Прямоугольник"
+  type-head: "Голова игрока"
+  type-progress: "Индикатор прогресса"
+  type-bar: "Индикатор прогресса"
+  type-top: "Рейтинг"
+  type-leaderboard: "Рейтинг"
+  type-other: "Другой элемент"
+  remove-element: "Удалить элемент"
+  remove-element-confirm: "Удалить этот элемент из черновика?"
+  remove-page-confirm: "Удалить эту страницу и её элементы из черновика?"
+  discard-confirm: "Отменить все несохранённые изменения?"

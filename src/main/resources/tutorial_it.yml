@@ -1,0 +1,13 @@
+title: 'Tabelloni'
+permission: vystormboards.admin
+pages:
+  - title: 'Appendere un tabellone'
+    text: |
+      Guarda il muro dove andrà l’angolo in alto a sinistra e usa /boards create.
+  - title: 'Modificare le pagine'
+    text: |
+      /boards apre l’editor: immagini, testo live, teste, pulsanti e più pagine.
+  - title: 'Classifiche e sondaggi'
+    text: |
+      Mostra classifiche con /boards top e fai votare direttamente sul tabellone.
+      Scrivi /boards help per vedere tutti i comandi.

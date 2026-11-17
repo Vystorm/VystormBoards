@@ -1,0 +1,239 @@
+# Français — UTF-8. Keep keys, placeholders and formatting tokens unchanged.
+usage-create: <gray>/boards create NAME WIDTH HEIGHT – Regardez le bloc mural qui devrait être le coin supérieur gauche.
+usage-create-console: <gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – bloc mural du coin supérieur
+  gauche et du côté des faces de la planche.
+usage-remove: <gray>/boards remove NAME
+denied: <red>Vous n'avez pas la permission pour ça.
+player-only: <red>Lancez ça en jeu.
+reloaded: <green>Vystorm Planches rechargées ({count} planches).
+list-header: '<gold>Conseils d''administration ({count}):'
+list-entry: <gray>- <yellow>{name}</yellow> {size} à {where}
+bad-name: <red>Les noms peuvent utiliser a-z, 0-9, _ et - (max. 32).
+bad-size: <red>La largeur et la hauteur doivent être de 1 à 16 cadres.
+exists: <red>Une planche appelée {name} existe déjà.
+look-at-wall: <red>Regardez le côté d'un bloc mural (max. 10 pâtés de maisons).
+no-room: '<red>Pas de chambre à {x} {y} {z}: besoin d''un mur solide derrière et espace libre à l''avant.'
+created: <green>Conseil <yellow>{name}</yellow> ({size}) créé. Modifier en boards.yml, puis /boards reload.
+removed: <green>Tableau {name} enlevé (cadres {frames}).
+unknown-board: <red>Pas de tableau appelé {name}.
+failed: <red>Cela n'a pas fonctionné; les détails sont dans le journal du serveur.
+info: <gold>{name}</gold> <gray>{size} cadres ({pixels} px) à {where} – {elements} éléments, {pages} pages, {clicks} zones
+  de clic, {mode}, cartes {maps}
+info-per-player: tiré par joueur
+info-shared: une photo pour tout le monde
+click-cooldown: <red>Pas encore – essayez à nouveau dans {seconds} s.
+top-disabled: <red>Les classements sont désactivés (leaderboards.enabled en config.yml).
+top-list-header: <gold>Classements sur vos tableaux ({count}):</gold> <gray>cliquez sur un pour voir les premiers endroits
+top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} joueurs
+top-unknown: <red>Source de classement inconnue {source}. Stat:NAME, titulaire:%...% ou objectif:NAME.
+top-header: <gold>{name}</gold> <dark_gray>({source}, {players} joueurs)
+top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
+top-empty: <gray>Aucune valeur encore – ils sont collectés pendant que les joueurs sont en ligne.
+top-reset-ask: <yellow>Oubliez toutes les valeurs stockées de {source} ?
+top-reset: <green>Classement {source} réinitialiser; il remplit à nouveau des joueurs en ligne et des statistiques enregistrées.
+top-reset-objective: <red>Les classements du tableau de bord viennent en direct du tableau de bord; réinitialisez l'objectif
+  là-bas.
+rankings-header: '<gold>Classement de {player}:'
+rankings-none: <gray>Pas encore dans un classement.
+rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'
+menu-rankings: <gold>Classement de {player}
+menu-rankings-line: '<gray>{name}: <yellow>#{rank}</yellow> <dark_gray>({value})'
+menu-rankings-click: '<dark_gray>Cliquez sur : afficher dans le chat'
+vote-cast: <green>Vous avez voté pour <yellow>{option}</yellow>.
+vote-changed: <green>Votre vote va maintenant à <yellow>{option}</yellow>.
+vote-same: <gray>Vous avez déjà voté pour <yellow>{option}</yellow>.
+vote-locked: <red>Vous avez déjà voté pour {option}; les votes ne peuvent pas être modifiés.
+vote-closed: <red>Ce sondage est fermé.
+poll-disabled: <red>Les sondages sont désactivés (polls.enabled en config.yml).
+poll-bad-id: <red>Les bureaux de vote peuvent utiliser a-z, 0-9, _ et - (max. 32).
+poll-unknown: <red>Pas de sondage appelé {poll} (pas de vote et pas de bouton de tableau).
+poll-list-header: <gold>Sondages ({count}):</gold> <gray>cliquez sur un pour les résultats
+poll-list-empty: '<gray>Pas encore de sondages. Ajoutez une zone de clic avec vote: "poll:option" à un tableau.'
+poll-list-entry: <gray>- <yellow>{poll}</yellow> – {votes} voix, {state}
+poll-header: <gold>Sondage {poll}</gold> <gray>– {votes} voix, {state}
+poll-option: <gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)
+poll-state-open: ouvert
+poll-state-closed: fermé
+poll-closed: <green>Sondage {poll} clos – les boutons du tableau ne prennent plus de vote.
+poll-opened: <green>Le sondage {poll} est à nouveau ouvert.
+poll-reset-ask: <yellow>Supprimer les {votes} votes du sondage {poll}?
+poll-reset: <green>Sondage {poll} réinitialisation ({votes} votes supprimés).
+button-confirm: <red>[Confirmer la remise à zéro]
+button-close: <yellow>[Fermer le sondage]
+button-open: <green>[Ouvrir le sondage]
+button-reset: <red>[Effacer les votes]
+button-refresh: <gray>[Actualiser]
+render-status: '<gray>Les conseils d''administration sont établis comme suit: <gold>{mode}</gold> (mode de rendu : {configured}).
+  <dark_gray>{reason}'
+render-stats: <gray>Murs de paquets <white>{walls}</white>, téléspectateurs <white>{viewers}</white>, cadres réservés aux
+  clients <white>{frames}</white>; envoyé <white>{spawns}</white> apparition et <white>{maps}</white> mises à jour de la carte
+  ({pixels} pixels, environ {kib} KiB avant compression), <white>{clicks}</white> clics; ids en usage {mapids} cartes / {entityids}
+  cadres; Coté {avg} μs avg, {max} μs max.
+countdown-days: '{days}d'
+poll-deadline: '<gray>Sondage {poll} Date limite: {time}'
+poll-deadline-none: <gray>Le sondage {poll} n'a pas de date limite.
+poll-deadline-invalid: <red>Utilisez une date/heure future telle que 2026-12-24T18:00 (heure du serveur), ou clear.
+commands:
+  boards:
+    description: 'Panneaux d''affichage : créer, lister et supprimer des panneaux, des classements et des sondages'
+    aliases: []
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Éditeur de pages"
+        args:
+          name: NAME
+      create:
+        name: create
+        aliases: []
+        description: Accrochez une nouvelle planche sur le mur que vous regardez (angle en haut à gauche); de la console avec
+          le monde, la position et la face
+        args:
+          name: NAME
+          width: WIDTH
+          height: HEIGHT
+          world: WORLD
+          x: X
+          y: Y
+          z: Z
+          facing: north|east|south|west
+      info:
+        name: info
+        aliases: []
+        description: Taille, position, éléments, pages et zones de clic d'une carte
+        args:
+          name: NAME
+      list:
+        name: list
+        aliases: []
+        description: Toutes les planches avec taille et position
+      deadline:
+        name: deadline
+        aliases: []
+        description: Afficher ou définir la date limite d'un sondage en heure du serveur; clear la supprime
+        args:
+          id: ID
+          time: HEURE|clear
+      poll:
+        name: poll
+        aliases: []
+        description: Tous les sondages, ou les résultats d'un sondage; fermer, ouvrir ou remettre à zéro
+        args:
+          id: ID
+          action: fermer|ouvert|réinitialiser
+          confirm: confirmer
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Livre d’or : lister, retirer une entrée ou vider"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: photos
+        aliases: []
+        description: "Faire d’un tableau un diaporama de photos Snapshot"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: reload
+        aliases: []
+        description: Recharger la configuration, les tableaux et les fichiers linguistiques
+      remove:
+        name: remove
+        aliases: []
+        description: Supprimer une planche et ses cadres d'articles
+        args:
+          name: NAME
+      render:
+        name: render
+        aliases: []
+        description: Mode rendu en utilisation et compteurs de paquets
+      top:
+        name: top
+        aliases: []
+        description: Classements en usage, les premières places d'une source, ou réinitialiser ses valeurs stockées
+        args:
+          source: SOURCE
+          action: réinitialiser
+          confirm: confirmer
+    values:
+      close: fermer
+      open: ouvert
+      reset: réinitialiser
+      confirm: confirmer
+navigation-invalid: <red>Ce bouton de page a une cible invalide ou le tableau n'a pas de pages.
+navigation-auto: <green>La rotation automatique des pages a repris.
+navigation-page: <gray>Page {page} du {pages}.
+feature-off: <red>Cette fonctionnalité est désactivée sur ce serveur.
+
+# Free feature release: editor
+editor:
+  title: "Éditeur de pages"
+  usage: "Utilisez /boards edit NOM."
+  page: "Page {page}"
+  elements: "{count} éléments"
+  add-page: "Ajouter une page vide"
+  interval: "Rotation toutes les {seconds}s"
+  interval-prompt: "Secondes par page (1–3600)"
+  save: "Vérifier et appliquer"
+  discard: "Abandonner le brouillon"
+  element-hint: "Clic : modifier le texte. Maj-clic : supprimer."
+  back: "Retour aux pages"
+  add-text: "Ajouter du texte"
+  text-prompt: "Texte (240 caractères maximum)"
+  duplicate: "Dupliquer la page"
+  earlier: "Déplacer avant"
+  later: "Déplacer après"
+  remove-page: "Supprimer la page"
+  preview: "Aperçu sur une carte privée"
+  preview-item: "Aperçu du brouillon"
+  preview-ready: "<green>Tenez la carte. Aperçu privé pendant deux minutes. /boards edit rouvre le brouillon."
+  confirm: "Appliquer ce brouillon ? Toute modification externe de boards.yml empêchera la sauvegarde."
+  save-saved: "<green>Panneau enregistré."
+  save-conflict: "<red>boards.yml a changé. Rouvrez l’éditeur ; aucun écrasement."
+  save-failed: "<red>Échec de l’enregistrement. Le brouillon reste ouvert."
+  invalid: "<red>Valeur invalide ou limite : 32 pages, 45 éléments par page."
+  inventory-full: "<red>Libérez une place pour la carte."
+  unavailable: "<red>Éditeur ou aperçu indisponible. Vérifiez le panneau et le journal."
+guestbook:
+  title: "Livre d’or"
+  question: "Laisse un court message (60 caractères max.)."
+  written: "<green>✍ Merci – ton message est sur le panneau."
+  empty: "<red>Écris d’abord quelques mots."
+  cooldown: "<red>Tu pourras réécrire dans {seconds} s."
+  disabled: "<gray>Les livres d’or sont désactivés sur ce serveur."
+  none: "<gray>Aucun livre d’or n’a encore d’entrées."
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} entrées"
+  empty-book: "<gray>Le livre d’or {book} est vide."
+  header: "<gold>Livre d’or {book} ({count}, plus récent d’abord) :"
+  line: "<gray>{number}. <white>{player}</white> : {text}"
+  remove-button: "<red>[retirer]"
+  removed: "<green>Entrée {number} retirée de {book}."
+  no-entry: "<red>{book} n’a pas d’entrée {number}."
+  cleared: "<green>{book} vidé ({count} entrées)."
+photos-set: "<green>Le tableau {name} affiche maintenant des photos Snapshot ({source})."
+photos-usage: "<gray>/boards photos NOM [gallery | newest | player:NOM]"
+
+panel:
+  pages: "Pages"
+  edit-page: "Modifier la page"
+  empty: "Cette page ne contient aucun élément."
+  element: "Élément {number}"
+  type: "Type"
+  type-text: "Texte"
+  type-image: "Image"
+  type-rect: "Rectangle"
+  type-head: "Tête de joueur"
+  type-progress: "Barre de progression"
+  type-bar: "Barre de progression"
+  type-top: "Classement"
+  type-leaderboard: "Classement"
+  type-other: "Autre élément"
+  remove-element: "Supprimer l’élément"
+  remove-element-confirm: "Supprimer cet élément du brouillon ?"
+  remove-page-confirm: "Supprimer cette page et ses éléments du brouillon ?"
+  discard-confirm: "Abandonner toutes les modifications non enregistrées ?"

@@ -1,0 +1,239 @@
+usage-create: "<gray>/boards create NAME WIDTH HEIGHT – 看向作为左上角的墙面方块。"
+usage-create-console: "<gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – 左上角的墙面方块以及看板朝向的一面。"
+usage-remove: "<gray>/boards remove NAME"
+denied: "<red>你没有权限执行此操作。"
+player-only: "<red>请在游戏内执行此命令。"
+reloaded: "<green>Vystorm Boards 已重新加载（{count} 块看板）。"
+list-header: "<gold>看板（{count}）："
+list-entry: "<gray>- <yellow>{name}</yellow> {size}，位于 {where}"
+bad-name: "<red>名称只能使用 a-z、0-9、_ 和 -（最多 32 个字符）。"
+bad-size: "<red>宽度和高度必须为 1 到 16 个物品展示框。"
+exists: "<red>名为 {name} 的看板已存在。"
+look-at-wall: "<red>请看向墙面方块的一侧（最远 10 格）。"
+no-room: "<red>{x} {y} {z} 处没有空间：后方需要实心墙面，前方需要空位。"
+created: "<green>看板 <yellow>{name}</yellow>（{size}）已创建。在 boards.yml 中编辑，然后执行 /boards reload。"
+removed: "<green>看板 {name} 已移除（{frames} 个物品展示框）。"
+unknown-board: "<red>没有名为 {name} 的看板。"
+failed: "<red>操作失败，详情请查看服务器日志。"
+info: "<gold>{name}</gold> <gray>{size} 个物品展示框（{pixels} 像素），位于 {where} – {elements} 个元素，{pages} 页，{clicks} 个点击区域，{mode}，地图 {maps}"
+info-per-player: "按玩家分别绘制"
+info-shared: "所有人看到同一画面"
+click-cooldown: "<red>还不行 – 请在 {seconds} 秒后重试。"
+# rankings ("top" elements)
+top-disabled: "<red>排行榜已关闭（config.yml 中的 leaderboards.enabled）。"
+top-list-header: "<gold>你的看板上的排行榜（{count}）：</gold> <gray>点击查看前几名"
+top-list-entry: "<gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} 名玩家"
+top-unknown: "<red>未知的排行榜来源 {source}。请使用 stat:NAME、placeholder:%...% 或 objective:NAME。"
+top-header: "<gold>{name}</gold> <dark_gray>（{source}，{players} 名玩家）"
+top-entry: "<gray>#{rank} <white>{name}</white> <yellow>{value}"
+top-empty: "<gray>暂无数据 – 玩家在线时会进行收集。"
+top-reset-ask: "<yellow>要清除 {source} 的所有已存储数值吗？"
+top-reset: "<green>排行榜 {source} 已重置，将从在线玩家和已保存的统计信息重新填充。"
+top-reset-objective: "<red>记分板排行榜实时读取记分板；请在记分板中重置该记分项。"
+rankings-header: "<gold>{player} 的排名："
+rankings-none: "<gray>尚未上任何排行榜。"
+rankings-line: "<gray>- {name}：<yellow>#{rank}</yellow>（{value}）"
+menu-rankings: "<gold>{player} 的排名"
+menu-rankings-line: "<gray>{name}：<yellow>#{rank}</yellow> <dark_gray>（{value}）"
+menu-rankings-click: "<dark_gray>点击：在聊天栏中显示"
+# polls (click areas with "vote")
+vote-cast: "<green>你投票给了 <yellow>{option}</yellow>。"
+vote-changed: "<green>你的投票已改为 <yellow>{option}</yellow>。"
+vote-same: "<gray>你已经投票给了 <yellow>{option}</yellow>。"
+vote-locked: "<red>你已经投票给了 {option}，投票无法更改。"
+vote-closed: "<red>此投票已关闭。"
+poll-disabled: "<red>投票已关闭（config.yml 中的 polls.enabled）。"
+poll-bad-id: "<red>投票 ID 只能使用 a-z、0-9、_ 和 -（最多 32 个字符）。"
+poll-unknown: "<red>没有名为 {poll} 的投票（没有投票记录，也没有看板按钮）。"
+poll-list-header: "<gold>投票（{count}）：</gold> <gray>点击查看结果"
+poll-list-empty: "<gray>还没有投票。在看板上添加一个带有 vote: \"poll:option\" 的点击区域。"
+poll-list-entry: "<gray>- <yellow>{poll}</yellow> – {votes} 票，{state}"
+poll-header: "<gold>投票 {poll}</gold> <gray>– {votes} 票，{state}"
+poll-option: "<gray>{bar} <white>{option}</white> <yellow>{count}</yellow>（{percent} %）"
+poll-state-open: "进行中"
+poll-state-closed: "已关闭"
+poll-closed: "<green>投票 {poll} 已关闭 – 看板按钮不再接受投票。"
+poll-opened: "<green>投票 {poll} 已重新开放。"
+poll-reset-ask: "<yellow>要删除投票 {poll} 的全部 {votes} 票吗？"
+poll-reset: "<green>投票 {poll} 已重置（移除了 {votes} 票）。"
+button-confirm: "<red>[确认重置]"
+button-close: "<yellow>[关闭投票]"
+button-open: "<green>[开放投票]"
+button-reset: "<red>[重置投票]"
+button-refresh: "<gray>[刷新]"
+render-status: "<gray>看板的绘制方式为 <gold>{mode}</gold>（render-mode：{configured}）。<dark_gray>{reason}"
+render-stats: "<gray>数据包墙 <white>{walls}</white>，观看者 <white>{viewers}</white>，仅客户端物品展示框 <white>{frames}</white>；已发送 <white>{spawns}</white> 次物品展示框生成和 <white>{maps}</white> 次地图更新（{pixels} 像素，压缩前约 {kib} KiB），<white>{clicks}</white> 次点击；使用中的 ID：{mapids} 个地图 / {entityids} 个物品展示框；Core 刻耗时平均 {avg} µs，最高 {max} µs。"
+
+# 通过 Vystorm Core 提供的 /boards：每位玩家看到自己语言的说明、帮助和 Tab 补全。commands.boards 下的 "aliases" 是额外的
+# 主命令（全服生效，由管理员在 Core 配置 commands.localized-aliases 中选择语言）；子命令的 "name" 和 "aliases"
+# 在所有语言中都可使用，英文始终有效。
+# Days in front of a board countdown ({countdown:2026-12-24T18:00}), e.g. "3d 04:12:09".
+countdown-days: "{days}天"
+
+poll-deadline: "<gray>投票 {poll} 的截止时间：{time}"
+poll-deadline-none: "<gray>投票 {poll} 没有截止时间。"
+poll-deadline-invalid: "<red>请输入未来时间，例如 2026-12-24T18:00（服务器时间），或 clear。"
+
+commands:
+  boards:
+    description: "看板：创建、列出和移除看板，排行榜和投票"
+    aliases: [看板]
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "告示板页面编辑器"
+        args:
+          name: NAME
+      create:
+        name: 创建
+        aliases: []
+        description: "在你看着的墙上挂一块新看板（左上角）；控制台需提供世界、位置和朝向"
+        args:
+          name: 名称
+          width: 宽度
+          height: 高度
+          world: 世界
+          x: X
+          "y": "Y"
+          z: Z
+          facing: "north|east|south|west"
+      info:
+        name: 信息
+        aliases: []
+        description: "看板的尺寸、位置、元素、页面和点击区域"
+        args:
+          name: 名称
+      list:
+        name: 列表
+        aliases: []
+        description: "所有看板及其尺寸和位置"
+      deadline:
+        name: 截止
+        aliases: []
+        description: "查看或设置投票截止时间（服务器时间）；clear 清除截止时间"
+        args:
+          id: ID
+          time: "时间|clear"
+      poll:
+        name: 投票
+        aliases: []
+        description: "所有投票，或某个投票的结果；关闭、开启或重置"
+        args:
+          id: ID
+          action: "关闭|开启|重置"
+          confirm: 确认
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "留言簿：列出、删除一条或清空"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: 照片
+        aliases: []
+        description: "把展板变成 Snapshot 照片幻灯片"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: 重载
+        aliases: []
+        description: "重新加载配置、看板和语言文件"
+      remove:
+        name: 移除
+        aliases: []
+        description: "移除一块看板及其物品展示框"
+        args:
+          name: 名称
+      render:
+        name: 渲染
+        aliases: []
+        description: "当前的渲染方式和数据包计数"
+      top:
+        name: 排行
+        aliases: []
+        description: "使用中的排行榜、某个来源的前几名，或重置其存储的数值"
+        args:
+          source: 来源
+          action: 重置
+          confirm: 确认
+    values:
+      close: 关闭
+      open: 开启
+      reset: 重置
+      confirm: 确认
+navigation-invalid: "<red>此翻页按钮的目标无效，或看板没有页面。"
+navigation-auto: "<green>已恢复自动轮播。"
+navigation-page: "<gray>第 {page} 页，共 {pages} 页。"
+feature-off: "<red>此功能在本服务器上已关闭。"
+
+# Free feature release: editor
+editor:
+  title: "告示板页面编辑器"
+  usage: "使用 /boards edit 名称 编辑告示板。"
+  page: "第{page}页"
+  elements: "{count}个元素"
+  add-page: "添加空白页"
+  interval: "每{seconds}秒切换"
+  interval-prompt: "每页秒数（1–3600）"
+  save: "确认并应用"
+  discard: "放弃草稿"
+  element-hint: "点击编辑文字，Shift点击删除元素。"
+  back: "返回页面列表"
+  add-text: "添加文字"
+  text-prompt: "文字（最多240字）"
+  duplicate: "复制页面"
+  earlier: "前移一页"
+  later: "后移一页"
+  remove-page: "删除页面"
+  preview: "在私人地图上预览"
+  preview-item: "告示板草稿预览"
+  preview-ready: "<green>手持预览地图，仅你可见，持续两分钟。/boards edit 返回草稿。"
+  confirm: "将草稿应用到实际告示板？若boards.yml已被修改则不会覆盖。"
+  save-saved: "<green>告示板已保存。"
+  save-conflict: "<red>boards.yml已更改，请重新打开编辑器。未覆盖任何内容。"
+  save-failed: "<red>保存失败，草稿仍保留。"
+  invalid: "<red>值无效或超出编辑器上限：32页，每页45个元素。"
+  inventory-full: "<red>请为预览地图腾出一个物品栏位置。"
+  unavailable: "<red>编辑器或预览不可用，请检查告示板和服务器日志。"
+guestbook:
+  title: "留言簿"
+  question: "留下一句简短留言（最多 60 个字符）。"
+  written: "<green>✍ 谢谢——你的留言已显示在看板上。"
+  empty: "<red>请先写几个字。"
+  cooldown: "<red>{seconds} 秒后才能再写。"
+  disabled: "<gray>本服务器已关闭留言簿。"
+  none: "<gray>还没有任何留言簿有留言。"
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} 条"
+  empty-book: "<gray>留言簿 {book} 是空的。"
+  header: "<gold>留言簿 {book}（{count} 条，最新在前）："
+  line: "<gray>{number}. <white>{player}</white>：{text}"
+  remove-button: "<red>[删除]"
+  removed: "<green>已从 {book} 删除第 {number} 条。"
+  no-entry: "<red>{book} 没有第 {number} 条。"
+  cleared: "<green>已清空 {book}（{count} 条）。"
+photos-set: "<green>展板 {name} 现在展示 Snapshot 照片（{source}）。"
+photos-usage: "<gray>/boards photos 名称 [gallery | newest | player:名称]"
+
+panel:
+  pages: "页面"
+  edit-page: "编辑页面"
+  empty: "此页面没有元素。"
+  element: "元素 {number}"
+  type: "类型"
+  type-text: "文本"
+  type-image: "图片"
+  type-rect: "矩形"
+  type-head: "玩家头颅"
+  type-progress: "进度条"
+  type-bar: "进度条"
+  type-top: "排行榜"
+  type-leaderboard: "排行榜"
+  type-other: "其他元素"
+  remove-element: "删除元素"
+  remove-element-confirm: "从草稿中删除此元素？"
+  remove-page-confirm: "从草稿中删除此页面及其所有元素？"
+  discard-confirm: "放弃所有未保存的更改？"

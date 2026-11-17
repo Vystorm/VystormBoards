@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "intro": {
+    "en": "A few quick choices for Vystorm Boards. Everything else stays on its defaults.",
+    "de": "Ein paar schnelle Entscheidungen für Vystorm Boards. Alles andere bleibt auf Standard.",
+    "fr": "Quelques choix rapides pour Vystorm Boards. Le reste garde ses valeurs par défaut.",
+    "it": "Alcune scelte rapide per Vystorm Boards. Il resto resta predefinito.",
+    "pt_br": "Algumas escolhas rápidas para Vystorm Boards. O resto fica no padrão.",
+    "ru": "Несколько быстрых решений для Vystorm Boards. Остальное останется по умолчанию.",
+    "zh_cn": "Vystorm Boards 的几个快速选项，其余保持默认。"
+  },
+  "questions": [
+    {
+      "id": "leaderboards",
+      "text": {
+        "en": "Enable leaderboards?",
+        "de": "Ranglisten aktivieren?",
+        "fr": "Activer les classements ?",
+        "it": "Attivare le classifiche?",
+        "pt_br": "Ativar rankings?",
+        "ru": "Включить таблицы лидеров?",
+        "zh_cn": "启用排行榜？"
+      },
+      "type": "choice",
+      "recommended": "on",
+      "options": [
+        {
+          "id": "on",
+          "label": {
+            "en": "On",
+            "de": "An",
+            "fr": "Activé",
+            "it": "Attivo",
+            "pt_br": "Ligado",
+            "ru": "Вкл.",
+            "zh_cn": "开启"
+          },
+          "set": {
+            "config.yml:leaderboards.enabled": true
+          }
+        },
+        {
+          "id": "off",
+          "label": {
+            "en": "Off",
+            "de": "Aus",
+            "fr": "Désactivé",
+            "it": "Disattivo",
+            "pt_br": "Desligado",
+            "ru": "Выкл.",
+            "zh_cn": "关闭"
+          },
+          "set": {
+            "config.yml:leaderboards.enabled": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "polls",
+      "text": {
+        "en": "Enable polls?",
+        "de": "Umfragen aktivieren?",
+        "fr": "Activer les sondages ?",
+        "it": "Attivare i sondaggi?",
+        "pt_br": "Ativar enquetes?",
+        "ru": "Включить опросы?",
+        "zh_cn": "启用投票？"
+      },
+      "type": "choice",
+      "recommended": "on",
+      "options": [
+        {
+          "id": "on",
+          "label": {
+            "en": "On",
+            "de": "An",
+            "fr": "Activé",
+            "it": "Attivo",
+            "pt_br": "Ligado",
+            "ru": "Вкл.",
+            "zh_cn": "开启"
+          },
+          "set": {
+            "config.yml:polls.enabled": true
+          }
+        },
+        {
+          "id": "off",
+          "label": {
+            "en": "Off",
+            "de": "Aus",
+            "fr": "Désactivé",
+            "it": "Disattivo",
+            "pt_br": "Desligado",
+            "ru": "Выкл.",
+            "zh_cn": "关闭"
+          },
+          "set": {
+            "config.yml:polls.enabled": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "text": {
+        "en": "May players change their vote?",
+        "de": "Dürfen Spieler ihre Stimme ändern?",
+        "fr": "Les joueurs peuvent-ils changer de vote ?",
+        "it": "I giocatori possono cambiare voto?",
+        "pt_br": "Jogadores podem mudar o voto?",
+        "ru": "Можно ли менять голос?",
+        "zh_cn": "玩家可以更改投票吗？"
+      },
+      "type": "choice",
+      "recommended": "on",
+      "options": [
+        {
+          "id": "on",
+          "label": {
+            "en": "On",
+            "de": "An",
+            "fr": "Activé",
+            "it": "Attivo",
+            "pt_br": "Ligado",
+            "ru": "Вкл.",
+            "zh_cn": "开启"
+          },
+          "set": {
+            "config.yml:polls.allow-change": true
+          }
+        },
+        {
+          "id": "off",
+          "label": {
+            "en": "Off",
+            "de": "Aus",
+            "fr": "Désactivé",
+            "it": "Disattivo",
+            "pt_br": "Desligado",
+            "ru": "Выкл.",
+            "zh_cn": "关闭"
+          },
+          "set": {
+            "config.yml:polls.allow-change": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "guestbooks",
+      "text": {
+        "en": "Allow guestbook boards where players leave short messages?",
+        "de": "Gästebuch-Boards erlauben, auf denen Spieler kurze Nachrichten hinterlassen?",
+        "fr": "Autoriser les panneaux livre d’or où les joueurs laissent un court message ?",
+        "it": "Consentire i pannelli libro degli ospiti con brevi messaggi dei giocatori?",
+        "pt_br": "Permitir painéis de livro de visitas com mensagens curtas dos jogadores?",
+        "ru": "Разрешить табло гостевой книги с короткими сообщениями игроков?",
+        "zh_cn": "允许玩家在留言簿看板上留下简短留言？"
+      },
+      "type": "choice",
+      "recommended": "on",
+      "options": [
+        {
+          "id": "on",
+          "label": {
+            "en": "On",
+            "de": "An",
+            "fr": "Activé",
+            "it": "Attivo",
+            "pt_br": "Ligado",
+            "ru": "Вкл.",
+            "zh_cn": "开启"
+          },
+          "set": {
+            "config.yml:guestbooks.enabled": true
+          }
+        },
+        {
+          "id": "off",
+          "label": {
+            "en": "Off",
+            "de": "Aus",
+            "fr": "Désactivé",
+            "it": "Disattivo",
+            "pt_br": "Desligado",
+            "ru": "Выкл.",
+            "zh_cn": "关闭"
+          },
+          "set": {
+            "config.yml:guestbooks.enabled": false
+          }
+        }
+      ]
+    }
+  ]
+}

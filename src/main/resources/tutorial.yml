@@ -1,0 +1,13 @@
+title: 'Boards'
+permission: vystormboards.admin
+pages:
+  - title: 'Hang a board'
+    text: |
+      Look at a wall where the top-left corner should be and use /boards create. The board is built from item frames with maps.
+  - title: 'Edit pages'
+    text: |
+      /boards opens the editor: add images, live text, player heads, buttons and several pages.
+  - title: 'Rankings and polls'
+    text: |
+      Show leaderboards with /boards top and let players vote in polls right on the board.
+      Type /boards help to see every command.

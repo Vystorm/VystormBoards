@@ -1,0 +1,13 @@
+title: 'Panneaux'
+permission: vystormboards.admin
+pages:
+  - title: 'Accrocher un panneau'
+    text: |
+      Regardez le mur à l’endroit du coin supérieur gauche et utilisez /boards create.
+  - title: 'Modifier les pages'
+    text: |
+      /boards ouvre l’éditeur : images, texte en direct, têtes, boutons et plusieurs pages.
+  - title: 'Classements et sondages'
+    text: |
+      Affichez des classements avec /boards top et laissez voter sur le panneau.
+      Tapez /boards help pour voir toutes les commandes.

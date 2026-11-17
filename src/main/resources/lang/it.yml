@@ -1,0 +1,237 @@
+# Italiano — UTF-8. Keep keys, placeholders and formatting tokens unchanged.
+usage-create: <gray>/boards create NAME WIDTH HEIGHT – guardare il blocco parete che dovrebbe essere l'angolo in alto a sinistra.
+usage-create-console: <gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – blocco parete dell'angolo
+  in alto a sinistra e il lato del bordo affronta.
+usage-remove: <gray>/boards remove NAME
+denied: <red>Ti manca il permesso.
+player-only: <red>Mettilo in gioco.
+reloaded: <green>Vystorm Borse ricaricate ({count} tavole).
+list-header: '<gold>Borse ({count}):'
+list-entry: <gray>- <yellow>{name}</yellow> {size} al {where}
+bad-name: <red>I nomi possono usare a-z, 0-9, _ e - (max. 32).
+bad-size: <red>Larghezza e altezza devono essere 1 a 16 cornici.
+exists: <red>Un consiglio chiamato {name} esiste già.
+look-at-wall: <red>Guarda il lato di un blocco a parete (max. 10 isolati di distanza).
+no-room: '<red>Nessuna stanza al {x} {y} {z}: ha bisogno di una parete solida dietro e spazio libero davanti.'
+created: <green>Consiglio <yellow>{name}</yellow> ({size}) creato. Modificalo in boards.yml, poi /boards reload.
+removed: <green>Bordo {name} rimosso ({frames} cornici).
+unknown-board: <red>Nessun consiglio chiamato {name}.
+failed: <red>Questo non ha funzionato; i dettagli sono nel registro server.
+info: <gold>{name}</gold> <gray>{size} cornici ({pixels} px) a {where} – {elements} elementi, {pages} pagine, {clicks} aree
+  di clic, {mode}, mappe {maps}
+info-per-player: disegnato per giocatore
+info-shared: una foto per tutti
+click-cooldown: <red>Non ancora – riprovare in {seconds} s.
+top-disabled: <red>Le classifiche sono spente (leaderboards.enabled nel config.yml).
+top-list-header: <gold>Classifica sulle tue tavole ({count}):</gold> <gray>clicca uno per vedere i primi posti
+top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} giocatori
+top-unknown: <red>Fonte di classifica sconosciuta {source}. Utilizzare stat:NAME, segnaposto:%...% o obiettivo:NAME.
+top-header: <gold>{name}</gold> <dark_gray>({source}, {players} giocatori)
+top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
+top-empty: <gray>Nessun valore ancora – sono raccolti mentre i giocatori sono online.
+top-reset-ask: <yellow>Dimentica tutti i valori memorizzati di {source}?
+top-reset: <green>Ranking {source} reset; si riempie di nuovo da giocatori online e statistiche salvate.
+top-reset-objective: <red>Le classifiche dello scoreboard vengono dal vivo dal tabellone; resettare l'obiettivo lì.
+rankings-header: '<gold>Classifiche di {player}:'
+rankings-none: <gray>Non in nessun posto.
+rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'
+menu-rankings: <gold>Classifiche di {player}
+menu-rankings-line: '<gray>{name}: <yellow>#{rank}</yellow> <dark_gray>({value})'
+menu-rankings-click: '<dark_gray>Clicca: mostra in chat'
+vote-cast: <green>Hai votato per <yellow>{option}</yellow>.
+vote-changed: <green>Il vostro voto ora va a <yellow>{option}</yellow>.
+vote-same: <gray>Hai già votato <yellow>{option}</yellow>.
+vote-locked: <red>Hai già votato per {option}; i voti non possono essere cambiati.
+vote-closed: <red>Questo sondaggio e' chiuso.
+poll-disabled: <red>I sondaggi sono spenti (polls.enabled nel config.yml).
+poll-bad-id: <red>I poll ids possono usare a-z, 0-9, _ e - (max. 32).
+poll-unknown: <red>Nessun sondaggio chiamato {poll} (non voti e nessun pulsante di bordo).
+poll-list-header: <gold>Sondaggi ({count}):</gold> <gray>clicca uno per i risultati
+poll-list-empty: '<gray>Ancora niente sondaggi. Aggiungi un''area click con voto: "poll:option" a una tavola.'
+poll-list-entry: <gray>- <yellow>{poll}</yellow> – {votes} voti, {state}
+poll-header: <gold>Poll {poll}</gold> <gray>– {votes} voti, {state}
+poll-option: <gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)
+poll-state-open: aperto
+poll-state-closed: chiuso chiuso
+poll-closed: <green>Poll {poll} chiuso – i pulsanti di bordo non prendono più voti.
+poll-opened: <green>Poll {poll} è aperto di nuovo.
+poll-reset-ask: <yellow>Elimina tutti i {votes} voti del sondaggio {poll}?
+poll-reset: <green>Poll {poll} reset ({votes} voti rimossi).
+button-confirm: <red>[Conferma azzeramento]
+button-close: <yellow>[Chiudi sondaggio]
+button-open: <green>[Apri sondaggio]
+button-reset: <red>[Azzera voti]
+button-refresh: <gray>[Aggiorna]
+render-status: '<gray>Le schede sono disegnate come <gold>{mode}</gold> (modifica: {configured}). <dark_gray>{reason}'
+render-stats: <gray>Pareti del pacchetto <white>{walls}</white>, spettatori <white>{viewers}</white>, cornici solo cliente
+  <white>{frames}</white>; inviato <white>{spawns}</white> cornice abiti e <white>{maps}</white> aggiornamenti della mappa
+  ({pixels} pixel, circa {kib} KiB prima della compressione), <white>{clicks}</white> clicca; ids in uso {mapids} mappe /
+  {entityids} cornici; Tick core {avg} μs avg, {max} μs max.
+countdown-days: '{days}d'
+poll-deadline: '<gray>Termine: {poll}: {time}'
+poll-deadline-none: <gray>Il sondaggio {poll} non ha scadenza.
+poll-deadline-invalid: <red>Usa una data/ora futura come 2026-12-24T18:00 (ora del server), oppure clear.
+commands:
+  boards:
+    description: 'Billboards: creare, elencare e rimuovere tavole, classifiche e sondaggi'
+    aliases: []
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Editor delle pagine"
+        args:
+          name: NAME
+      create:
+        name: create
+        aliases: []
+        description: Appendere una nuova scheda sulla parete si guarda (angolo in alto a sinistra); dalla console con mondo,
+          posizione e fronte
+        args:
+          name: NAME
+          width: WIDTH
+          height: HEIGHT
+          world: WORLD
+          x: X
+          y: Sì
+          z: Z
+          facing: north|east|south|west
+      info:
+        name: info
+        aliases: []
+        description: Dimensioni, posizione, elementi, pagine e aree click di una scheda
+        args:
+          name: NAME
+      list:
+        name: list
+        aliases: []
+        description: Tutte le tavole con dimensioni e posizione
+      deadline:
+        name: deadline
+        aliases: []
+        description: Mostra o imposta la scadenza del sondaggio nell'ora del server; clear la rimuove
+        args:
+          id: ID
+          time: ORA|clear
+      poll:
+        name: poll
+        aliases: []
+        description: Tutti i sondaggi, o i risultati di un sondaggio; chiudere, aprire o resettarlo
+        args:
+          id: ID
+          action: chiudi|aperto|ripristina
+          confirm: conferma
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Libro degli ospiti: elenca, rimuovi una voce o svuota"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: photos
+        aliases: []
+        description: "Trasforma una bacheca in una presentazione di foto Snapshot"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: reload
+        aliases: []
+        description: Ricarica file di configurazione, schede e lingua
+      remove:
+        name: remove
+        aliases: []
+        description: Rimuovere una scheda e le sue cornici
+        args:
+          name: NAME
+      render:
+        name: render
+        aliases: []
+        description: Modalità di rimborso in uso e contatori di pacchetti
+      top:
+        name: top
+        aliases: []
+        description: Classificazioni in uso, i primi posti di una fonte, o ripristinare i suoi valori memorizzati
+        args:
+          source: SOURCE
+          action: ripristina
+          confirm: conferma
+    values:
+      close: chiudi
+      open: aperto
+      reset: ripristina
+      confirm: conferma
+navigation-invalid: <red>Questo pulsante di pagina ha un obiettivo non valido o la scheda non ha pagine.
+navigation-auto: <green>Riprende la rotazione automatica della pagina.
+navigation-page: <gray>Pagina {page} del {pages}.
+feature-off: <red>Questa funzione è disattivata su questo server.
+
+# Free feature release: editor
+editor:
+  title: "Editor delle pagine"
+  usage: "Usa /boards edit NOME."
+  page: "Pagina {page}"
+  elements: "{count} elementi"
+  add-page: "Aggiungi pagina vuota"
+  interval: "Ruota ogni {seconds}s"
+  interval-prompt: "Secondi per pagina (1–3600)"
+  save: "Controlla e applica"
+  discard: "Scarta bozza"
+  element-hint: "Clic: modifica testo. Maiusc-clic: rimuovi."
+  back: "Torna alle pagine"
+  add-text: "Aggiungi testo"
+  text-prompt: "Testo (fino a 240 caratteri)"
+  duplicate: "Duplica pagina"
+  earlier: "Sposta prima"
+  later: "Sposta dopo"
+  remove-page: "Rimuovi pagina"
+  preview: "Anteprima su mappa privata"
+  preview-item: "Anteprima della bozza"
+  preview-ready: "<green>Tieni la mappa. Anteprima privata per due minuti. /boards edit riapre la bozza."
+  confirm: "Applicare la bozza? Modifiche esterne a boards.yml impediranno il salvataggio."
+  save-saved: "<green>Pannello salvato."
+  save-conflict: "<red>boards.yml è cambiato. Riapri l’editor; nessuna sovrascrittura."
+  save-failed: "<red>Salvataggio fallito. La bozza resta aperta."
+  invalid: "<red>Valore non valido o limite: 32 pagine, 45 elementi per pagina."
+  inventory-full: "<red>Libera uno spazio per la mappa."
+  unavailable: "<red>Editor o anteprima non disponibile. Controlla pannello e registro."
+guestbook:
+  title: "Libro degli ospiti"
+  question: "Lascia un breve messaggio (fino a 60 caratteri)."
+  written: "<green>✍ Grazie – il tuo messaggio è sul pannello."
+  empty: "<red>Scrivi prima qualche parola."
+  cooldown: "<red>Potrai scrivere di nuovo tra {seconds} s."
+  disabled: "<gray>I libri degli ospiti sono disattivati su questo server."
+  none: "<gray>Nessun libro degli ospiti ha ancora voci."
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} voci"
+  empty-book: "<gray>Il libro {book} è vuoto."
+  header: "<gold>Libro {book} ({count}, più recenti prima):"
+  line: "<gray>{number}. <white>{player}</white>: {text}"
+  remove-button: "<red>[rimuovi]"
+  removed: "<green>Voce {number} rimossa da {book}."
+  no-entry: "<red>{book} non ha la voce {number}."
+  cleared: "<green>{book} svuotato ({count} voci)."
+photos-set: "<green>La bacheca {name} ora mostra foto Snapshot ({source})."
+photos-usage: "<gray>/boards photos NOME [gallery | newest | player:NOME]"
+
+panel:
+  pages: "Pagine"
+  edit-page: "Modifica pagina"
+  empty: "Questa pagina non contiene elementi."
+  element: "Elemento {number}"
+  type: "Tipo"
+  type-text: "Testo"
+  type-image: "Immagine"
+  type-rect: "Rettangolo"
+  type-head: "Testa del giocatore"
+  type-progress: "Barra di avanzamento"
+  type-bar: "Barra di avanzamento"
+  type-top: "Classifica"
+  type-leaderboard: "Classifica"
+  type-other: "Altro elemento"
+  remove-element: "Rimuovi elemento"
+  remove-element-confirm: "Rimuovere questo elemento dalla bozza?"
+  remove-page-confirm: "Rimuovere questa pagina e i suoi elementi dalla bozza?"
+  discard-confirm: "Scartare tutte le modifiche non salvate?"

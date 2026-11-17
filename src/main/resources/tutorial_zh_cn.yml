@@ -1,0 +1,13 @@
+title: '告示板'
+permission: vystormboards.admin
+pages:
+  - title: '挂上告示板'
+    text: |
+      看向墙上左上角的位置并输入 /boards create。
+  - title: '编辑页面'
+    text: |
+      /boards 打开编辑器：添加图片、实时文本、玩家头像、按钮和多个页面。
+  - title: '排行榜与投票'
+    text: |
+      用 /boards top 显示排行榜，并让玩家直接在告示板上投票。
+      输入 /boards help 查看全部命令。

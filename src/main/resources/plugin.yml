@@ -1,0 +1,16 @@
+name: VystormBoards
+version: '${version}'
+main: at.esoren.vystormboards.BoardsPlugin
+api-version: '1.20.6'
+author: Esoren
+depend: [vystorm_core]
+website: https://vystorm.net
+description: Dynamic billboards from item frames and maps - images, live texts, placeholders, player faces and click actions.
+softdepend: [PlaceholderAPI]
+permissions:
+  vystormboards.admin:
+    description: Manage boards.
+    default: op
+  vystormboards.rankings:
+    description: See a player's board rankings in the Vystorm Core player menu.
+    default: true

@@ -1,0 +1,13 @@
+title: 'Tafeln'
+permission: vystormboards.admin
+pages:
+  - title: 'Tafel aufhängen'
+    text: |
+      Schau auf die Wand, wo die obere linke Ecke hin soll, und nutze /boards create. Die Tafel besteht aus Rahmen mit Karten.
+  - title: 'Seiten bearbeiten'
+    text: |
+      /boards öffnet den Editor: Bilder, Live-Text, Spielerköpfe, Knöpfe und mehrere Seiten hinzufügen.
+  - title: 'Ranglisten und Umfragen'
+    text: |
+      Zeige Ranglisten mit /boards top und lass Spieler direkt an der Tafel abstimmen.
+      Mit /boards help siehst du alle Befehle.

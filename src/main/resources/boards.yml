@@ -1,0 +1,68 @@
+# Vystorm Boards – board definitions. /boards create adds entries here; edit them and run /boards reload.
+#
+# Coordinates inside a board are pixels: every frame is 128×128, so a 4×2 board is 512×256 pixels, (0,0) top left.
+#
+# Elements are drawn in order (later ones on top):
+#   - type: rect   x, y, width, height, color ("#rrggbb" or a name like gold), opacity (0-100)
+#   - type: image  file (in images/), x, y, width, height (fits inside, keeps aspect ratio), dither (true/false)
+#   - type: text   text (MiniMessage, <br> for a new line), x, y, size (pixels), color, align (left/center/right),
+#                  width (box for align, default: to the right edge), shadow, font (Java font name), line-height
+#   - type: head   x, y, size, player (empty = the player looking at the board)
+#   - type: progress  x, y, width, height, value, max (placeholders allowed, e.g. "%vault_eco_balance%" / "10000"),
+#                  color, background
+#   - type: top    a ranking: source ("stat:PLAY_ONE_MINUTE", "stat:MINE_BLOCK:DIAMOND_ORE", "placeholder:%vault_eco_balance%",
+#                  "objective:kills"), x, y, width, rows, size, color, value-color, format (number/decimal/time/seconds/distance),
+#                  order (highest/lowest), heads, medals, highlight (viewer's row and own place), label, font
+#
+# Any element can have "permission: vip.rank" (shown only to players with it) or "permission: '!vip.rank'" (only without).
+# Texts shrink to fit their box (width) unless "fit: false". GIF images are animated (see animation-fps in config.yml).
+#
+# Pages: "pages:" is a list of element lists; one page at a time is drawn on top of "elements", switching every
+# "page-seconds" (default 10). Example:
+# Click areas may use navigate: next|previous|auto or a quoted page number, e.g. "2".
+# This pins a page for that viewer until auto, disconnect or reload. Default: empty (ordinary click).
+# Navigation respects page/permission/cooldown and ignores command/message/vote on the same area.
+# Text placeholders {page} and {pages} show the viewer's page and total. Draw button labels with text elements.
+#     page-seconds: 8
+#     pages:
+#       - [{type: text, x: 0, y: 60, size: 24, align: center, text: "Page one"}]
+#       - [{type: text, x: 0, y: 60, size: 24, align: center, text: "Page two"}]
+#
+# Placeholders in texts: {player} {world} {online} {max} {time} {date} {board}, plus %placeholderapi% ones.
+# Boards with {player}, %...% or a viewer head are drawn per player; others once for everyone.
+#
+# Clicks (left or right click on the board), first matching area wins:
+#   - x, y, width, height, command ("warp shop", {player} is replaced), as (player/console), message (MiniMessage)
+#     optional: page (1, 2 … – the area only reacts while that page is shown), permission ("vip" or "!vip"),
+#     cooldown (seconds per player, e.g. 86400 for a daily reward button)
+#     vote ("event:pvp" – a poll button; one vote per player and poll, the command only runs for the first vote)
+#
+# Poll results in texts and progress bars: {votes:event:pvp} votes, {votes:event:pvp:%} percent, {votes:event} all votes,
+# {vote:event} the viewer's own choice. Manage polls with /boards poll.
+#
+# Example (after /boards create spawn 4 2 the generated entry looks like this, with your coordinates):
+#
+# boards:
+#   spawn:
+#     world: world
+#     x: 100
+#     y: 72
+#     z: -20
+#     facing: NORTH
+#     width: 4
+#     height: 2
+#     glow: true
+#     background: "#252a33"
+#     refresh-seconds: 5
+#     maps: [12, 13, 14, 15, 16, 17, 18, 19]
+#     elements:
+#       - {type: rect, x: 0, y: 0, width: 512, height: 42, color: "#e3b04b"}
+#       - {type: text, x: 0, y: 6, size: 28, align: center, color: "#252a33", shadow: false, text: "<b>Welcome to Vystorm"}
+#       - {type: head, x: 16, y: 60, size: 64}
+#       - {type: text, x: 96, y: 62, size: 20, text: "Hello <gold>{player}</gold>!<br><gray>{online}/{max} online · {time}"}
+#       - {type: image, file: vystorm-logo.png, x: 384, y: 52, width: 112, height: 112}
+#       - {type: rect, x: 96, y: 190, width: 160, height: 44, color: "#3a7d44"}
+#       - {type: text, x: 96, y: 200, width: 160, size: 20, align: center, text: "<b>Shop"}
+#     clicks:
+#       - {x: 96, y: 190, width: 160, height: 44, command: "warp shop", as: player}
+boards: {}

@@ -1,0 +1,239 @@
+usage-create: "<gray>/boards create NAME BREITE HÖHE – sieh den Wandblock an, der die linke obere Ecke wird."
+usage-create-console: "<gray>/boards create NAME BREITE HÖHE WELT X Y Z north|east|south|west – Wandblock der linken oberen Ecke und die Seite, in die die Tafel zeigt."
+usage-remove: "<gray>/boards remove NAME"
+denied: "<red>Dafür fehlt dir die Berechtigung."
+player-only: "<red>Diesen Befehl im Spiel ausführen."
+reloaded: "<green>Vystorm Boards neu geladen ({count} Tafeln)."
+list-header: "<gold>Tafeln ({count}):"
+list-entry: "<gray>- <yellow>{name}</yellow> {size} bei {where}"
+bad-name: "<red>Namen dürfen a-z, 0-9, _ und - enthalten (max. 32)."
+bad-size: "<red>Breite und Höhe müssen 1 bis 16 Rahmen sein."
+exists: "<red>Eine Tafel namens {name} gibt es schon."
+look-at-wall: "<red>Sieh die Seite eines Wandblocks an (max. 10 Blöcke entfernt)."
+no-room: "<red>Kein Platz bei {x} {y} {z}: dahinter muss eine feste Wand, davor frei sein."
+created: "<green>Tafel <yellow>{name}</yellow> ({size}) erstellt. In boards.yml bearbeiten, dann /boards reload."
+removed: "<green>Tafel {name} entfernt ({frames} Rahmen)."
+unknown-board: "<red>Keine Tafel namens {name}."
+failed: "<red>Das hat nicht geklappt; Details stehen im Serverlog."
+info: "<gold>{name}</gold> <gray>{size} Rahmen ({pixels} px) bei {where} – {elements} Elemente, {pages} Seiten, {clicks} Klickbereiche, {mode}, Karten {maps}"
+info-per-player: "pro Spieler gezeichnet"
+info-shared: "ein Bild für alle"
+click-cooldown: "<red>Noch nicht – versuch es in {seconds} s wieder."
+# Ranglisten ("top"-Elemente)
+top-disabled: "<red>Ranglisten sind abgeschaltet (leaderboards.enabled in config.yml)."
+top-list-header: "<gold>Ranglisten auf deinen Tafeln ({count}):</gold> <gray>anklicken für die ersten Plätze"
+top-list-entry: "<gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} Spieler"
+top-unknown: "<red>Unbekannte Ranglisten-Quelle {source}. Nutze stat:NAME, placeholder:%...% oder objective:NAME."
+top-header: "<gold>{name}</gold> <dark_gray>({source}, {players} Spieler)"
+top-entry: "<gray>#{rank} <white>{name}</white> <yellow>{value}"
+top-empty: "<gray>Noch keine Werte – sie werden gesammelt, während Spieler online sind."
+top-reset-ask: "<yellow>Alle gespeicherten Werte von {source} vergessen?"
+top-reset: "<green>Rangliste {source} zurückgesetzt; sie füllt sich wieder aus Online-Spielern und gespeicherten Statistiken."
+top-reset-objective: "<red>Scoreboard-Ranglisten kommen live vom Scoreboard; setz das Ziel dort zurück."
+rankings-header: "<gold>Ranglisten von {player}:"
+rankings-none: "<gray>Noch auf keiner Rangliste."
+rankings-line: "<gray>- {name}: <yellow>Platz {rank}</yellow> ({value})"
+menu-rankings: "<gold>Ranglisten von {player}"
+menu-rankings-line: "<gray>{name}: <yellow>Platz {rank}</yellow> <dark_gray>({value})"
+menu-rankings-click: "<dark_gray>Klick: im Chat anzeigen"
+# Umfragen (Klickbereiche mit "vote")
+vote-cast: "<green>Du hast für <yellow>{option}</yellow> gestimmt."
+vote-changed: "<green>Deine Stimme geht jetzt an <yellow>{option}</yellow>."
+vote-same: "<gray>Du hast schon für <yellow>{option}</yellow> gestimmt."
+vote-locked: "<red>Du hast schon für {option} gestimmt; Stimmen lassen sich nicht ändern."
+vote-closed: "<red>Diese Umfrage ist beendet."
+poll-disabled: "<red>Umfragen sind abgeschaltet (polls.enabled in config.yml)."
+poll-bad-id: "<red>Umfrage-IDs dürfen a-z, 0-9, _ und - enthalten (max. 32)."
+poll-unknown: "<red>Keine Umfrage namens {poll} (keine Stimmen und kein Tafel-Knopf)."
+poll-list-header: "<gold>Umfragen ({count}):</gold> <gray>anklicken für das Ergebnis"
+poll-list-empty: "<gray>Noch keine Umfragen. Gib einer Tafel einen Klickbereich mit vote: \"umfrage:option\"."
+poll-list-entry: "<gray>- <yellow>{poll}</yellow> – {votes} Stimmen, {state}"
+poll-header: "<gold>Umfrage {poll}</gold> <gray>– {votes} Stimmen, {state}"
+poll-option: "<gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)"
+poll-state-open: "offen"
+poll-state-closed: "beendet"
+poll-closed: "<green>Umfrage {poll} beendet – die Tafel-Knöpfe nehmen keine Stimmen mehr an."
+poll-opened: "<green>Umfrage {poll} ist wieder offen."
+poll-reset-ask: "<yellow>Alle {votes} Stimmen der Umfrage {poll} löschen?"
+poll-reset: "<green>Umfrage {poll} zurückgesetzt ({votes} Stimmen entfernt)."
+button-confirm: "<red>[Zurücksetzen bestätigen]"
+button-close: "<yellow>[Umfrage beenden]"
+button-open: "<green>[Umfrage öffnen]"
+button-reset: "<red>[Stimmen löschen]"
+button-refresh: "<gray>[Aktualisieren]"
+render-status: "<gray>Boards werden als <gold>{mode}</gold> gezeichnet (render-mode: {configured}). <dark_gray>{reason}"
+render-stats: "<gray>Paket-Wände <white>{walls}</white>, Betrachter <white>{viewers}</white>, Client-Rahmen <white>{frames}</white>; gesendet: <white>{spawns}</white> Rahmen und <white>{maps}</white> Kartenupdates ({pixels} Pixel, etwa {kib} KiB vor Kompression), <white>{clicks}</white> Klicks; belegte IDs {mapids} Karten / {entityids} Rahmen; Core-Tick {avg} µs im Schnitt, {max} µs max."
+
+# /boards über Vystorm Core: Beschreibung, Hilfe und Tab-Vervollständigung je Spieler. "aliases" unter commands.boards sind
+# zusätzliche Hauptbefehle (serverweit, der Admin wählt die Sprachen: Core-Konfig commands.localized-aliases); "name" und
+# "aliases" eines Unterbefehls werden in jeder Sprache verstanden, Englisch geht immer.
+# Days in front of a board countdown ({countdown:2026-12-24T18:00}), e.g. "3d 04:12:09".
+countdown-days: "{days} T."
+
+poll-deadline: "<gray>Frist der Umfrage {poll}: {time}"
+poll-deadline-none: "<gray>Umfrage {poll} hat keine Frist."
+poll-deadline-invalid: "<red>Nutze einen zukünftigen Zeitpunkt wie 2026-12-24T18:00 (Serverzeit) oder clear."
+
+commands:
+  boards:
+    description: "Anzeigetafeln: Tafeln erstellen, auflisten und entfernen, Ranglisten und Umfragen"
+    aliases: [anzeigetafeln]
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Board-Seiteneditor"
+        args:
+          name: NAME
+      create:
+        name: erstellen
+        aliases: []
+        description: "Neue Tafel an die Wand hängen, die du ansiehst (linke obere Ecke); von der Konsole mit Welt, Position und Richtung"
+        args:
+          name: NAME
+          width: BREITE
+          height: HÖHE
+          world: WELT
+          x: X
+          "y": "Y"
+          z: Z
+          facing: "north|east|south|west"
+      info:
+        name: info
+        aliases: []
+        description: "Größe, Position, Elemente, Seiten und Klickflächen einer Tafel"
+        args:
+          name: NAME
+      list:
+        name: liste
+        aliases: []
+        description: "Alle Tafeln mit Größe und Position"
+      deadline:
+        name: frist
+        aliases: []
+        description: "Umfragefrist in Serverzeit anzeigen oder setzen; clear entfernt sie"
+        args:
+          id: ID
+          time: "ZEIT|clear"
+      poll:
+        name: umfrage
+        aliases: []
+        description: "Alle Umfragen oder die Ergebnisse einer Umfrage; schließen, öffnen oder zurücksetzen"
+        args:
+          id: ID
+          action: "schließen|öffnen|zurücksetzen"
+          confirm: bestätigen
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Gästebuch-Einträge: auflisten, einen entfernen oder leeren"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: fotos
+        aliases: []
+        description: "Eine Tafel zur Diashow mit Snapshot-Fotos machen"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: neuladen
+        aliases: []
+        description: "Konfiguration, Tafeln und Sprachdateien neu laden"
+      remove:
+        name: entfernen
+        aliases: []
+        description: "Eine Tafel samt ihren Rahmen entfernen"
+        args:
+          name: NAME
+      render:
+        name: darstellung
+        aliases: []
+        description: "Verwendete Darstellungsart und Paket-Zähler"
+      top:
+        name: rangliste
+        aliases: []
+        description: "Verwendete Ranglisten, die ersten Plätze einer Quelle oder ihre gespeicherten Werte zurücksetzen"
+        args:
+          source: QUELLE
+          action: zurücksetzen
+          confirm: bestätigen
+    values:
+      close: [schließen, schliessen]
+      open: [öffnen, oeffnen]
+      reset: [zurücksetzen, zuruecksetzen]
+      confirm: [bestätigen, bestaetigen]
+navigation-invalid: "<red>Diese Seitenschaltfläche hat ein ungültiges Ziel oder die Tafel hat keine Seiten."
+navigation-auto: "<green>Automatischer Seitenwechsel fortgesetzt."
+navigation-page: "<gray>Seite {page} von {pages}."
+feature-off: "<red>Dieses Feature ist auf diesem Server ausgeschaltet."
+
+# Free feature release: editor
+editor:
+  title: "Board-Seiteneditor"
+  usage: "Mit /boards edit NAME ein Board bearbeiten."
+  page: "Seite {page}"
+  elements: "{count} Elemente"
+  add-page: "Leere Seite hinzufügen"
+  interval: "Wechsel alle {seconds}s"
+  interval-prompt: "Sekunden pro Seite (1–3600)"
+  save: "Prüfen und übernehmen"
+  discard: "Entwurf verwerfen"
+  element-hint: "Klick: Text ändern. Shift-Klick: Element entfernen."
+  back: "Zurück zu den Seiten"
+  add-text: "Text hinzufügen"
+  text-prompt: "Text (bis zu 240 Zeichen)"
+  duplicate: "Seite duplizieren"
+  earlier: "Seite nach vorne"
+  later: "Seite nach hinten"
+  remove-page: "Seite entfernen"
+  preview: "Vorschau auf privater Karte"
+  preview-item: "Board-Entwurfsvorschau"
+  preview-ready: "<green>Halte die Vorschaukarte. Zwei Minuten nur für dich sichtbar. /boards edit öffnet den Entwurf."
+  confirm: "Entwurf auf das sichtbare Board übernehmen? Andere Änderungen an boards.yml verhindern das Speichern."
+  save-saved: "<green>Board gespeichert."
+  save-conflict: "<red>boards.yml wurde geändert. Editor neu öffnen; nichts wurde überschrieben."
+  save-failed: "<red>Speichern fehlgeschlagen. Dein Entwurf bleibt offen."
+  invalid: "<red>Ungültiger Wert oder Editorlimit erreicht: 32 Seiten, je 45 Elemente."
+  inventory-full: "<red>Mache einen Inventarplatz für die Vorschaukarte frei."
+  unavailable: "<red>Editor oder Vorschau nicht verfügbar. Board und Serverprotokoll prüfen."
+guestbook:
+  title: "Gästebuch"
+  question: "Hinterlasse eine kurze Nachricht (bis zu 60 Zeichen)."
+  written: "<green>✍ Danke – dein Eintrag steht auf dem Board."
+  empty: "<red>Schreib zuerst ein paar Worte."
+  cooldown: "<red>Du kannst in {seconds} s wieder schreiben."
+  disabled: "<gray>Gästebücher sind auf diesem Server ausgeschaltet."
+  none: "<gray>Noch kein Gästebuch hat Einträge."
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} Einträge"
+  empty-book: "<gray>Das Gästebuch {book} ist leer."
+  header: "<gold>Gästebuch {book} ({count}, neueste zuerst):"
+  line: "<gray>{number}. <white>{player}</white>: {text}"
+  remove-button: "<red>[entfernen]"
+  removed: "<green>Eintrag {number} aus {book} entfernt."
+  no-entry: "<red>{book} hat keinen Eintrag {number}."
+  cleared: "<green>{book} geleert ({count} Einträge)."
+photos-set: "<green>Tafel {name} zeigt jetzt Snapshot-Fotos ({source})."
+photos-usage: "<gray>/boards photos NAME [gallery | newest | player:NAME]"
+
+panel:
+  pages: "Seiten"
+  edit-page: "Seite bearbeiten"
+  empty: "Diese Seite enthält keine Elemente."
+  element: "Element {number}"
+  type: "Typ"
+  type-text: "Text"
+  type-image: "Bild"
+  type-rect: "Rechteck"
+  type-head: "Spielerkopf"
+  type-progress: "Fortschrittsbalken"
+  type-bar: "Fortschrittsbalken"
+  type-top: "Rangliste"
+  type-leaderboard: "Rangliste"
+  type-other: "Anderes Element"
+  remove-element: "Element entfernen"
+  remove-element-confirm: "Dieses Element aus dem Entwurf entfernen?"
+  remove-page-confirm: "Diese Seite mit allen Elementen aus dem Entwurf entfernen?"
+  discard-confirm: "Alle ungespeicherten Änderungen verwerfen?"

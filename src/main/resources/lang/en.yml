@@ -1,0 +1,239 @@
+usage-create: "<gray>/boards create NAME WIDTH HEIGHT – look at the wall block that should be the top-left corner."
+usage-create-console: "<gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – wall block of the top-left corner and the side the board faces."
+usage-remove: "<gray>/boards remove NAME"
+denied: "<red>You lack permission for this."
+player-only: "<red>Run this in game."
+reloaded: "<green>Vystorm Boards reloaded ({count} boards)."
+list-header: "<gold>Boards ({count}):"
+list-entry: "<gray>- <yellow>{name}</yellow> {size} at {where}"
+bad-name: "<red>Names may use a-z, 0-9, _ and - (max. 32)."
+bad-size: "<red>Width and height must be 1 to 16 frames."
+exists: "<red>A board called {name} already exists."
+look-at-wall: "<red>Look at the side of a wall block (max. 10 blocks away)."
+no-room: "<red>No room at {x} {y} {z}: needs a solid wall behind and free space in front."
+created: "<green>Board <yellow>{name}</yellow> ({size}) created. Edit it in boards.yml, then /boards reload."
+removed: "<green>Board {name} removed ({frames} frames)."
+unknown-board: "<red>No board called {name}."
+failed: "<red>That did not work; details are in the server log."
+info: "<gold>{name}</gold> <gray>{size} frames ({pixels} px) at {where} – {elements} elements, {pages} pages, {clicks} click areas, {mode}, maps {maps}"
+info-per-player: "drawn per player"
+info-shared: "one picture for everyone"
+click-cooldown: "<red>Not yet – try again in {seconds} s."
+# rankings ("top" elements)
+top-disabled: "<red>Rankings are switched off (leaderboards.enabled in config.yml)."
+top-list-header: "<gold>Rankings on your boards ({count}):</gold> <gray>click one to see the first places"
+top-list-entry: "<gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} players"
+top-unknown: "<red>Unknown ranking source {source}. Use stat:NAME, placeholder:%...% or objective:NAME."
+top-header: "<gold>{name}</gold> <dark_gray>({source}, {players} players)"
+top-entry: "<gray>#{rank} <white>{name}</white> <yellow>{value}"
+top-empty: "<gray>No values yet – they are collected while players are online."
+top-reset-ask: "<yellow>Forget all stored values of {source}?"
+top-reset: "<green>Ranking {source} reset; it fills again from online players and saved statistics."
+top-reset-objective: "<red>Scoreboard rankings come live from the scoreboard; reset the objective there."
+rankings-header: "<gold>Rankings of {player}:"
+rankings-none: "<gray>Not on any ranking yet."
+rankings-line: "<gray>- {name}: <yellow>#{rank}</yellow> ({value})"
+menu-rankings: "<gold>Rankings of {player}"
+menu-rankings-line: "<gray>{name}: <yellow>#{rank}</yellow> <dark_gray>({value})"
+menu-rankings-click: "<dark_gray>Click: show in chat"
+# polls (click areas with "vote")
+vote-cast: "<green>You voted for <yellow>{option}</yellow>."
+vote-changed: "<green>Your vote now goes to <yellow>{option}</yellow>."
+vote-same: "<gray>You already voted for <yellow>{option}</yellow>."
+vote-locked: "<red>You already voted for {option}; votes cannot be changed."
+vote-closed: "<red>This poll is closed."
+poll-disabled: "<red>Polls are switched off (polls.enabled in config.yml)."
+poll-bad-id: "<red>Poll ids may use a-z, 0-9, _ and - (max. 32)."
+poll-unknown: "<red>No poll called {poll} (no votes and no board button)."
+poll-list-header: "<gold>Polls ({count}):</gold> <gray>click one for the results"
+poll-list-empty: "<gray>No polls yet. Add a click area with vote: \"poll:option\" to a board."
+poll-list-entry: "<gray>- <yellow>{poll}</yellow> – {votes} votes, {state}"
+poll-header: "<gold>Poll {poll}</gold> <gray>– {votes} votes, {state}"
+poll-option: "<gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)"
+poll-state-open: "open"
+poll-state-closed: "closed"
+poll-closed: "<green>Poll {poll} closed – the board buttons no longer take votes."
+poll-opened: "<green>Poll {poll} is open again."
+poll-reset-ask: "<yellow>Delete all {votes} votes of poll {poll}?"
+poll-reset: "<green>Poll {poll} reset ({votes} votes removed)."
+button-confirm: "<red>[Confirm reset]"
+button-close: "<yellow>[Close poll]"
+button-open: "<green>[Open poll]"
+button-reset: "<red>[Reset votes]"
+button-refresh: "<gray>[Refresh]"
+render-status: "<gray>Boards are drawn as <gold>{mode}</gold> (render-mode: {configured}). <dark_gray>{reason}"
+render-stats: "<gray>Packet walls <white>{walls}</white>, viewers <white>{viewers}</white>, client-only frames <white>{frames}</white>; sent <white>{spawns}</white> frame spawns and <white>{maps}</white> map updates ({pixels} pixels, about {kib} KiB before compression), <white>{clicks}</white> clicks; ids in use {mapids} maps / {entityids} frames; Core tick {avg} µs avg, {max} µs max."
+
+# /boards through Vystorm Core: description, help and tab completion per player. "aliases" under commands.boards are extra
+# root commands (server-wide, the admin chooses which languages: Core config commands.localized-aliases); "name" and
+# "aliases" of a subcommand are accepted in every language, English always works.
+# Days in front of a board countdown ({countdown:2026-12-24T18:00}), e.g. "3d 04:12:09".
+countdown-days: "{days}d"
+
+poll-deadline: "<gray>Poll {poll} deadline: {time}"
+poll-deadline-none: "<gray>Poll {poll} has no deadline."
+poll-deadline-invalid: "<red>Use a future date/time such as 2026-12-24T18:00 (server time), or clear."
+
+commands:
+  boards:
+    description: "Billboards: create, list and remove boards, rankings and polls"
+    aliases: []
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Board page editor"
+        args:
+          name: NAME
+      create:
+        name: create
+        aliases: []
+        description: "Hang a new board on the wall you look at (top-left corner); from the console with world, position and facing"
+        args:
+          name: NAME
+          width: WIDTH
+          height: HEIGHT
+          world: WORLD
+          x: X
+          "y": "Y"
+          z: Z
+          facing: "north|east|south|west"
+      info:
+        name: info
+        aliases: []
+        description: "Size, position, elements, pages and click areas of a board"
+        args:
+          name: NAME
+      list:
+        name: list
+        aliases: []
+        description: "All boards with size and position"
+      deadline:
+        name: deadline
+        aliases: []
+        description: "Show or set a poll deadline in server time; clear removes it"
+        args:
+          id: ID
+          time: "TIME|clear"
+      poll:
+        name: poll
+        aliases: []
+        description: "All polls, or the results of one poll; close, open or reset it"
+        args:
+          id: ID
+          action: "close|open|reset"
+          confirm: confirm
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Guestbook entries: list, remove one or clear"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: photos
+        aliases: []
+        description: "Make a board a slideshow of Snapshot photos"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: reload
+        aliases: []
+        description: "Reload config, boards and language files"
+      remove:
+        name: remove
+        aliases: []
+        description: "Remove a board and its item frames"
+        args:
+          name: NAME
+      render:
+        name: render
+        aliases: []
+        description: "Render mode in use and packet counters"
+      top:
+        name: top
+        aliases: []
+        description: "Rankings in use, the first places of one source, or reset its stored values"
+        args:
+          source: SOURCE
+          action: reset
+          confirm: confirm
+    values:
+      close: close
+      open: open
+      reset: reset
+      confirm: confirm
+navigation-invalid: "<red>This page button has an invalid target or the board has no pages."
+navigation-auto: "<green>Automatic page rotation resumed."
+navigation-page: "<gray>Page {page} of {pages}."
+feature-off: "<red>This feature is turned off on this server."
+
+# Free feature release: editor
+editor:
+  title: "Board page editor"
+  usage: "Use /boards edit NAME to edit a board."
+  page: "Page {page}"
+  elements: "{count} elements"
+  add-page: "Add empty page"
+  interval: "Rotate every {seconds}s"
+  interval-prompt: "Seconds per page (1–3600)"
+  save: "Review and apply"
+  discard: "Discard draft"
+  element-hint: "Click: edit text. Shift-click: remove element."
+  back: "Back to pages"
+  add-text: "Add text"
+  text-prompt: "Text (up to 240 characters)"
+  duplicate: "Duplicate page"
+  earlier: "Move page earlier"
+  later: "Move page later"
+  remove-page: "Remove page"
+  preview: "Preview on a private map"
+  preview-item: "Board draft preview"
+  preview-ready: "<green>Hold the preview map. Visible only to you for two minutes. /boards edit returns to your draft."
+  confirm: "Apply this draft to the live board? Other edits to boards.yml will prevent saving."
+  save-saved: "<green>Board saved."
+  save-conflict: "<red>boards.yml changed. Reopen the editor; nothing was overwritten."
+  save-failed: "<red>Could not save. Your draft is still open."
+  invalid: "<red>Invalid value or editor limit reached: 32 pages, 45 elements per page."
+  inventory-full: "<red>Free one inventory slot for the preview map."
+  unavailable: "<red>Editor or preview unavailable. Check the board and server log."
+guestbook:
+  title: "Guestbook"
+  question: "Leave a short message (up to 60 characters)."
+  written: "<green>✍ Thanks – your entry is on the board."
+  empty: "<red>Write a few words first."
+  cooldown: "<red>You can write again in {seconds} s."
+  disabled: "<gray>Guestbooks are switched off on this server."
+  none: "<gray>No guestbook has entries yet."
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} entries"
+  empty-book: "<gray>The guestbook {book} is empty."
+  header: "<gold>Guestbook {book} ({count}, newest first):"
+  line: "<gray>{number}. <white>{player}</white>: {text}"
+  remove-button: "<red>[remove]"
+  removed: "<green>Entry {number} removed from {book}."
+  no-entry: "<red>{book} has no entry {number}."
+  cleared: "<green>{book} cleared ({count} entries)."
+photos-set: "<green>Board {name} now shows Snapshot photos ({source})."
+photos-usage: "<gray>/boards photos NAME [gallery | newest | player:NAME]"
+
+panel:
+  pages: "Pages"
+  edit-page: "Edit page"
+  empty: "No elements on this page."
+  element: "Element {number}"
+  type: "Type"
+  type-text: "Text"
+  type-image: "Image"
+  type-rect: "Rectangle"
+  type-head: "Player head"
+  type-progress: "Progress bar"
+  type-bar: "Progress bar"
+  type-top: "Ranking"
+  type-leaderboard: "Ranking"
+  type-other: "Other element"
+  remove-element: "Remove element"
+  remove-element-confirm: "Remove this element from the draft?"
+  remove-page-confirm: "Remove this page and its elements from the draft?"
+  discard-confirm: "Discard all unsaved changes?"

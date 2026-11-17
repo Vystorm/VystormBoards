@@ -1,0 +1,237 @@
+# Português (Brasil) — UTF-8. Keep keys, placeholders and formatting tokens unchanged.
+usage-create: <gray>/boards create NAME WIDTH HEIGHT – Olhe para o bloco de parede que deve ser o canto superior esquerdo.
+usage-create-console: <gray>/boards create NAME WIDTH HEIGHT WORLD X Y Z north|east|south|west – bloco de parede do canto
+  superior esquerdo e do lado que o tabuleiro enfrenta.
+usage-remove: <gray>/boards remove NAME
+denied: <red>Você não tem permissão para isso.
+player-only: <red>Faça isso no jogo.
+reloaded: <green>Vystorm placas recarregadas ({count} placas).
+list-header: '<gold>Conselhos ({count}):'
+list-entry: <gray>- <yellow>{name}</yellow> {size} em {where}
+bad-name: <red>Nomes podem usar A-Z, 0-9, e - (máx. 32).
+bad-size: <red>Largura e altura devem ser 1 a 16 quadros.
+exists: <red>Uma placa chamada {name} já existe.
+look-at-wall: <red>Olhe para o lado de um bloco de parede (máx. 10 quarteirões de distância).
+no-room: '<red>Sem espaço em {x} {y} {z}: precisa de uma parede sólida atrás e espaço livre na frente.'
+created: <green>Board <yellow>{name}</yellow> ({size}) criado. Edite em boards.yml, então /boards reload.
+removed: <green>Placa {name} removida ({frames} quadros).
+unknown-board: <red>Nenhuma placa chamada {name}.
+failed: <red>Isso não funcionou, os detalhes estão no registro do servidor.
+info: <gold>{name}</gold> <gray>{size} quadros ({pixels} px) em {where} - {elements} elementos, {pages} páginas, {clicks}
+  áreas de cliques, {mode}, mapas {maps}
+info-per-player: Desenhado por jogador
+info-shared: Uma foto para todos
+click-cooldown: <red>Ainda não. Tente novamente em {seconds} s.
+top-disabled: <red>Os rankings estão desligados (leaderboards.enabled em config.yml).
+top-list-header: <gold>Rankings em suas pranchas ({count}):</gold> <gray>Clique em um para ver os primeiros lugares
+top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> - {players} jogadores
+top-unknown: <red>Fonte de classificação desconhecida {source}. Use estat:NAME, substituto:%...% ou objetivo:NAME.
+top-header: <gold>{name}</gold> <dark_gray>({source}, {players} jogadores)
+top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
+top-empty: <gray>Nenhum valor ainda - eles são coletados enquanto os jogadores estão online.
+top-reset-ask: <yellow>Esquecer todos os valores armazenados de {source}?
+top-reset: <green>Ranking {source} reset, enche novamente de jogadores online e estatísticas salvas.
+top-reset-objective: <red>Os rankings do placar vêm ao vivo do placar, redefinir o objetivo lá.
+rankings-header: '<gold>Rankings de {player}:'
+rankings-none: <gray>Ainda não está em nenhum ranking.
+rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'
+menu-rankings: <gold>Rankings de {player}
+menu-rankings-line: '<gray>{name}: <yellow>#{rank}</yellow> <dark_gray>({value})'
+menu-rankings-click: '<dark_gray>Click: show in chat'
+vote-cast: <green>Você votou em <yellow>{option}</yellow>.
+vote-changed: <green>Seu voto agora vai para <yellow>{option}</yellow>.
+vote-same: <gray>Você já votou em <yellow>{option}</yellow>.
+vote-locked: <red>Você já votou em {option}, os votos não podem ser mudados.
+vote-closed: <red>A pesquisa está fechada.
+poll-disabled: <red>As pesquisas estão desligadas (polls.enabled em config.yml).
+poll-bad-id: <red>Identificadores de pesquisa podem usar A-Z, 0-9, e - (máx. 32).
+poll-unknown: <red>Nenhuma pesquisa ligou para {poll} (sem votos e sem botão de placa).
+poll-list-header: <gold>Pesquisas ({count}):</gold> <gray>Clique em um para os resultados
+poll-list-empty: '<gray>Sem pesquisas ainda. Adicione uma área de clique com voto: "poll:option" para um tabuleiro.'
+poll-list-entry: <gray>- <yellow>{poll}</yellow> - {votes} votos, {state}
+poll-header: <gold>Poll {poll}</gold> <gray>- {votes} votos, {state}
+poll-option: <gray>{bar} <white>{option}</white> <yellow>{count}</yellow> ({percent} %)
+poll-state-open: Abra
+poll-state-closed: Fechado
+poll-closed: <green>Poll {poll} fechado - os botões do conselho não mais tomar votos.
+poll-opened: <green>A pesquisa {poll} está aberta novamente.
+poll-reset-ask: <yellow>Apagar todos os {votes} votos da votação {poll}?
+poll-reset: <green>Pesquisa {poll} reset ({votes} votos removidos).
+button-confirm: <red>[Confirmar redefinição]
+button-close: <yellow>[Fechar enquete]
+button-open: <green>[Abrir enquete]
+button-reset: <red>[Apagar votos]
+button-refresh: <gray>[Atualizar]
+render-status: '<gray>As tábuas são desenhadas como <gold>{mode}</gold> (modo de rendição: {configured}). <dark_gray>{reason}'
+render-stats: <gray>Paredes de pacotes <white>{walls}</white>, telespectadores <white>{viewers}</white>, apenas para clientes
+  <white>{frames}</white># Enviado <white>{spawns}</white> A armação cria e <white>{maps}</white> mapa atualiza ({pixels}
+  pixels, cerca de {kib} KiB antes da compressão), <white>{clicks}</white> Clicks; IDs em uso {mapids} mapas / {entityids}
+  quadros; Carrapato central {avg} μs avg, {max} μs máx.
+countdown-days: '{days}d'
+poll-deadline: '<gray>Engate {poll} prazo: {time}'
+poll-deadline-none: <gray>A pesquisa {poll} não tem prazo.
+poll-deadline-invalid: <red>Use uma data/hora futura como 2026-12-24T18:00 (horário do servidor), ou clear.
+commands:
+  boards:
+    description: 'Billboards: criar, listar e remover placas, rankings e pesquisas'
+    aliases: []
+    sub:
+      edit:
+        name: edit
+        aliases: []
+        description: "Editor de páginas"
+        args:
+          name: NAME
+      create:
+        name: create
+        aliases: []
+        description: Pendure uma nova placa na parede que você olha (canto superior esquerdo); do console com o mundo, posição
+          e frente
+        args:
+          name: NAME
+          width: WIDTH
+          height: HEIGHT
+          world: WORLD
+          x: X
+          y: Y
+          z: Z
+          facing: north|east|south|west
+      info:
+        name: info
+        aliases: []
+        description: Tamanho, posição, elementos, páginas e áreas de clique de um tabuleiro
+        args:
+          name: NAME
+      list:
+        name: list
+        aliases: []
+        description: Todas as tábuas com tamanho e posição
+      deadline:
+        name: deadline
+        aliases: []
+        description: Mostrar ou definir o prazo da enquete no horário do servidor; clear remove o prazo
+        args:
+          id: ID
+          time: HORA|clear
+      poll:
+        name: poll
+        aliases: []
+        description: Todas as pesquisas, ou os resultados de uma pesquisa, fecham, abrem ou reiniciam
+        args:
+          id: ID
+          action: fechar|Abra|redefinir
+          confirm: confirmar
+      guestbook:
+        name: guestbook
+        aliases: []
+        description: "Livro de visitas: listar, remover uma entrada ou limpar"
+        args:
+          id: ID
+          action: "remove|clear"
+          number: NUMBER
+      photos:
+        name: photos
+        aliases: []
+        description: "Transformar um quadro em apresentação de fotos do Snapshot"
+        args:
+          name: NAME
+          source: SOURCE
+      reload:
+        name: reload
+        aliases: []
+        description: Recarregar arquivos de configuração, placas e idiomas
+      remove:
+        name: remove
+        aliases: []
+        description: Remova uma tábua e suas molduras
+        args:
+          name: NAME
+      render:
+        name: render
+        aliases: []
+        description: Modo de renderização em uso e contadores de pacotes
+      top:
+        name: top
+        aliases: []
+        description: Rankings em uso, os primeiros lugares de uma fonte, ou redefinir seus valores armazenados
+        args:
+          source: SOURCE
+          action: redefinir
+          confirm: confirmar
+    values:
+      close: fechar
+      open: Abra
+      reset: redefinir
+      confirm: confirmar
+navigation-invalid: <red>Este botão de página tem um alvo inválido ou o quadro não tem páginas.
+navigation-auto: <green>A rotação automática da página foi retomada.
+navigation-page: <gray>Página {page} de {pages}.
+feature-off: <red>Este recurso está desativado neste servidor.
+
+# Free feature release: editor
+editor:
+  title: "Editor de páginas"
+  usage: "Use /boards edit NOME."
+  page: "Página {page}"
+  elements: "{count} elementos"
+  add-page: "Adicionar página vazia"
+  interval: "Alternar a cada {seconds}s"
+  interval-prompt: "Segundos por página (1–3600)"
+  save: "Revisar e aplicar"
+  discard: "Descartar rascunho"
+  element-hint: "Clique: editar texto. Shift-clique: remover."
+  back: "Voltar às páginas"
+  add-text: "Adicionar texto"
+  text-prompt: "Texto (até 240 caracteres)"
+  duplicate: "Duplicar página"
+  earlier: "Mover para antes"
+  later: "Mover para depois"
+  remove-page: "Remover página"
+  preview: "Prévia em mapa privado"
+  preview-item: "Prévia do rascunho"
+  preview-ready: "<green>Segure o mapa. Prévia privada por dois minutos. /boards edit reabre o rascunho."
+  confirm: "Aplicar este rascunho? Alterações externas em boards.yml impedem salvar."
+  save-saved: "<green>Painel salvo."
+  save-conflict: "<red>boards.yml mudou. Reabra o editor; nada foi sobrescrito."
+  save-failed: "<red>Falha ao salvar. O rascunho continua aberto."
+  invalid: "<red>Valor inválido ou limite: 32 páginas, 45 elementos por página."
+  inventory-full: "<red>Libere um espaço para o mapa."
+  unavailable: "<red>Editor ou prévia indisponível. Verifique o painel e o log."
+guestbook:
+  title: "Livro de visitas"
+  question: "Deixe uma mensagem curta (até 60 caracteres)."
+  written: "<green>✍ Obrigado – sua mensagem está no painel."
+  empty: "<red>Escreva algumas palavras primeiro."
+  cooldown: "<red>Você pode escrever de novo em {seconds} s."
+  disabled: "<gray>Livros de visitas estão desligados neste servidor."
+  none: "<gray>Nenhum livro de visitas tem entradas ainda."
+  list-entry: "<gray>- <yellow>{book}</yellow> – {count} entradas"
+  empty-book: "<gray>O livro {book} está vazio."
+  header: "<gold>Livro {book} ({count}, mais recentes primeiro):"
+  line: "<gray>{number}. <white>{player}</white>: {text}"
+  remove-button: "<red>[remover]"
+  removed: "<green>Entrada {number} removida de {book}."
+  no-entry: "<red>{book} não tem a entrada {number}."
+  cleared: "<green>{book} limpo ({count} entradas)."
+photos-set: "<green>O quadro {name} agora mostra fotos do Snapshot ({source})."
+photos-usage: "<gray>/boards photos NOME [gallery | newest | player:NOME]"
+
+panel:
+  pages: "Páginas"
+  edit-page: "Editar página"
+  empty: "Esta página não tem elementos."
+  element: "Elemento {number}"
+  type: "Tipo"
+  type-text: "Texto"
+  type-image: "Imagem"
+  type-rect: "Retângulo"
+  type-head: "Cabeça de jogador"
+  type-progress: "Barra de progresso"
+  type-bar: "Barra de progresso"
+  type-top: "Ranking"
+  type-leaderboard: "Ranking"
+  type-other: "Outro elemento"
+  remove-element: "Remover elemento"
+  remove-element-confirm: "Remover este elemento do rascunho?"
+  remove-page-confirm: "Remover esta página e seus elementos do rascunho?"
+  discard-confirm: "Descartar todas as alterações não salvas?"
