@@ -52,7 +52,10 @@ class BugFixRegressionTest {
         }
     }
 
-    private BoardsPlugin plugin() throws Exception {
+    private BoardsPlugin plugin() throws Exception { return reloadable(dir); }
+
+    /** A mocked plugin whose real load() can run, with its files in {@code dir}. */
+    static BoardsPlugin reloadable(Path dir) throws Exception {
         BoardsPlugin p = mock(BoardsPlugin.class);
         when(p.getLogger()).thenReturn(mock(Logger.class));
         YamlConfiguration config = new YamlConfiguration();

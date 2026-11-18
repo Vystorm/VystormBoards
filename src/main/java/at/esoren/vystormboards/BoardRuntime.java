@@ -28,12 +28,22 @@ final class BoardRuntime {
     private long version;
     private volatile long invalidatedAt;
     private final int checkTicks;
+    /** Drawn per viewer: the board has viewer data and per-player.enabled is on. */
+    private final boolean perPlayer;
+
+    boolean perPlayer() { return perPlayer; }
 
     BoardRuntime(Board board, Signer signer, BiFunction<Board, Player, byte[]> composer) { this(board, signer, composer, board.refreshTicks); }
 
     /** {@code checkTicks}: how often the content is checked for changes (shorter for pages and animations). */
     BoardRuntime(Board board, Signer signer, BiFunction<Board, Player, byte[]> composer, int checkTicks) {
+        this(board, signer, composer, checkTicks, true);
+    }
+
+    /** {@code personal = false} (per-player.enabled off): one picture for everyone, even if the board has viewer data. */
+    BoardRuntime(Board board, Signer signer, BiFunction<Board, Player, byte[]> composer, int checkTicks, boolean personal) {
         this.board = board;
+        this.perPlayer = personal && board.perPlayer();
         this.checkTicks = Math.max(1, checkTicks);
         this.signer = signer;
         this.composer = composer;
@@ -45,7 +55,6 @@ final class BoardRuntime {
     void forget(UUID viewer) { pictures.remove(viewer); }
 
     private Picture picture(Player viewer, long now) {
-        boolean perPlayer = board.perPlayer();
         Picture current = perPlayer ? pictures.get(viewer.getUniqueId()) : shared;
         long refreshNanos = checkTicks * 50_000_000L;
         if (current != null && now - current.checkedAt() < refreshNanos && current.checkedAt() >= invalidatedAt) return current;
@@ -72,7 +81,7 @@ final class BoardRuntime {
         private long drawnShared = -1;
 
         Tile(int index) {
-            super(board.perPlayer());
+            super(perPlayer);
             this.index = index;
         }
 

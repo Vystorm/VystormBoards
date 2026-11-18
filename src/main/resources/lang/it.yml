@@ -166,7 +166,7 @@ commands:
 navigation-invalid: <red>Questo pulsante di pagina ha un obiettivo non valido o la scheda non ha pagine.
 navigation-auto: <green>Riprende la rotazione automatica della pagina.
 navigation-page: <gray>Pagina {page} del {pages}.
-feature-off: <red>Questa funzione è disattivata su questo server.
+feature-off: "<red>Questa funzione è disattivata su questo server."
 
 # Free feature release: editor
 editor:
@@ -235,3 +235,47 @@ panel:
   remove-element-confirm: "Rimuovere questo elemento dalla bozza?"
   remove-page-confirm: "Rimuovere questa pagina e i suoi elementi dalla bozza?"
   discard-confirm: "Scartare tutte le modifiche non salvate?"
+feature-needs: "<red>Serve l'interruttore {switch}, che su questo server è spento."
+switches:
+  boards: "L'intero plugin: le bacheche vengono disegnate e reagiscono ai clic"
+  frame-protection: "Le cornici delle bacheche non si possono rompere, colpire, ruotare o svuotare"
+  images: "Elementi immagine e presentazioni di foto Snapshot"
+  animations: "Le GIF animate si muovono (spento: solo il primo fotogramma)"
+  text: "Elementi di testo"
+  rectangles: "Rettangoli colorati"
+  heads: "Volti dei giocatori negli elementi testa e nelle classifiche"
+  progress: "Barre di avanzamento"
+  placeholders: "Segnaposto integrati come nome del giocatore e giocatori online"
+  countdowns: "Conti alla rovescia nei testi"
+  placeholderapi: "Segnaposto di PlaceholderAPI nei testi"
+  per-player: "Le bacheche con dati di chi guarda vengono disegnate per giocatore"
+  pages: "Le bacheche ruotano tra le loro pagine"
+  clicks: "Aree di clic: comandi, messaggi, voti, libri degli ospiti, pulsanti pagina"
+  packets: "Bacheche come pacchetti lato client (spento: cornici vere)"
+  rankings: "Classifiche sulle bacheche e /boards top"
+  rankings-menu: "Voce Classifiche nel menu giocatore di Core"
+  offline-stats: "Leggere le statistiche salvate dei giocatori offline"
+  polls: "Sondaggi: voti sulle bacheche e /boards poll"
+  vote-change: "I giocatori possono cambiare voto"
+  poll-deadlines: "I sondaggi si chiudono da soli alla scadenza"
+  guestbooks: "Libri degli ospiti: i giocatori lasciano una riga su una bacheca"
+  photos: "Presentazioni Snapshot e /boards photos"
+  clock: "Orologio di gioco nei testi"
+  navigation: "Navigazione personale con pulsanti pagina"
+  editor: "Editor di pagine con anteprima privata"
+  render-info: "Diagnostica di visualizzazione con /boards render"
+  tutorial: "Tutorial nel menu principale (serve un riavvio)"
+  glow: "Le nuove bacheche usano cornici luminose"
+placeholder:
+  votes: "Voti di un sondaggio o di un'opzione"
+  votes_percent: "Quota di un'opzione in percentuale"
+  vote: "Opzione votata dal giocatore, o -"
+  poll_open: "true o false: il sondaggio accetta voti"
+  guestbook_count: "Voci di un libro degli ospiti"
+  guestbook_name: "Autore della n-esima voce più recente"
+  guestbook_text: "Testo della n-esima voce più recente"
+  rank: "Posizione del giocatore in una classifica"
+  rank_value: "Valore del giocatore in una classifica"
+  top_name: "Nome in una posizione di una classifica"
+  top_value: "Valore in una posizione di una classifica"
+  board_count: "Bacheche caricate"

@@ -18,7 +18,7 @@
 - **Polls**: board buttons with `vote:` let players vote with one click; results show live on the board. See below.
 - `/boards create … <world> <x> <y> <z> <facing>` from the console, `/boards remove`, `/boards list`, `/boards reload`.
 - Texts in seven languages (`lang/en.yml`, `de`, `fr`, `it`, `pt_br`, `ru` and `zh_cn`) through the Vystorm Core language system (player language, `/vadmin language audit`); `config.yml` is editable in game with `/vadmin config`.
-- Paper/Purpur and Spigot/CraftBukkit 1.20.6–26.x. Plugin bytecode requires Java 21 or newer; use the Java version required by your server (newer Paper releases may require Java 25). Needs [Vystorm Core](https://www.spigotmc.org/resources/139848/) 0.64.0+ (free), with a Core build compatible with your server and Java version; PlaceholderAPI optional.
+- Needs [Vystorm Core](https://www.spigotmc.org/resources/139848/) 0.65.0 or newer (free); PlaceholderAPI optional. What the build checks: the plugin is compiled for Java 21 (`--release 21`) against the Paper API 1.21.11 and, in `compat1206`, against Paper 1.20.6; packet mode needs a server where Core supports client-only displays (Paper/Purpur 1.21.8 to 26.2), elsewhere boards use real item frames. Use the Java version your server needs.
 - On older servers, packet rendering uses real item frames and maps when Core's runtime capability probe cannot support client displays. Board content, GIFs, personal pages, clicks, rankings and polls remain available. Ranking sources for materials, entities or statistics absent on that server are skipped and logged; use sources available on that server.
 
 ## In-game clock
@@ -108,9 +108,15 @@ The optional `clicks[].navigate` key defaults to empty (ordinary click action). 
 
 ## Config
 
+Every feature has an on/off switch in `config.yml` (all on by default, listed in Vystorm Core's `/vadmin features`, applied without a restart except `tutorial.enabled`): `boards.enabled` (the whole plugin), `frame-protection.enabled`, `images.enabled`, `animated-images.enabled`, `text.enabled`, `rectangles.enabled`, `player-heads.enabled`, `progress-bars.enabled`, `placeholders.enabled`, `countdowns.enabled`, `placeholderapi`, `per-player.enabled`, `pages.enabled`, `click-areas.enabled`, `packet-mode.enabled`, `render-diagnostics.enabled`, `leaderboards.enabled`, `leaderboards.player-menu`, `leaderboards.seed-offline-stats`, `polls.enabled`, `polls.allow-change`, `polls.deadlines.enabled`, `guestbooks.enabled`, `snapshot-photos.enabled`, `world-clock.enabled`, `page-navigation.enabled`, `page-editor.enabled`, `tutorial.enabled`, `defaults.glow`. A switched-off feature answers "This feature is switched off on this server."; saved boards, rankings, votes and guestbooks are kept.
+
 `render-mode` (auto, packets or entities), `packet-view-distance` (48), `animation-fps`, `placeholderapi`, `defaults.glow`, `defaults.background`;
 `leaderboards.enabled` (true), `leaderboards.sample-seconds` (60), `leaderboards.seed-offline-stats` (true), `leaderboards.max-players` (1000), `leaderboards.player-menu` (true);
 `polls.enabled` (true), `polls.allow-change` (true).
+
+## Placeholders
+
+With Vystorm Core 0.65.0 the plugin registers the namespace `boards` (server thread; empty while the feature is switched off): `votes`, `votes_percent`, `vote`, `poll_open`, `guestbook_count`, `guestbook_name`, `guestbook_text`, `rank`, `rank_value`, `top_name`, `top_value`, `board_count`. Examples: `%vystorm_boards_votes_event_pvp%` (votes for option pvp of poll event, also `{boards:votes:event:pvp}`) and `%vystorm_boards_rank_play_one_minute%` (the viewer's place in the playtime ranking). `/vadmin placeholders boards` lists them. In the percent form an id with an underscore splits into arguments; use the brace form for such ids.
 
 ## Building
 

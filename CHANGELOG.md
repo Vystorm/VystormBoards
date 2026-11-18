@@ -1,3 +1,24 @@
+## 1.19.0 — 2026-11-18
+
+- Requires Vystorm Core 0.65.0 or newer. Update Core before you update this plugin.
+- Every feature can now be switched on and off in `config.yml`. All switches are on by default, so a server that updates keeps working as before; the new keys are added to your existing `config.yml` with their comments. Each switch is listed in Core's `/vadmin features` with a one-line description in seven languages and applies at once, without a restart (only `tutorial.enabled` needs one).
+  - The whole plugin: `boards.enabled`. Off: no board is drawn or clickable, packet boards disappear, item frames stay on the walls, and every `/boards` command except `reload` is switched off.
+  - Frames and display: `frame-protection.enabled`, `packet-mode.enabled` (off works like `render-mode: entities`), `per-player.enabled` (off: one picture for everyone), `pages.enabled` (off: first page only), `render-diagnostics.enabled`.
+  - Element types: `images.enabled`, `animated-images.enabled` (off: first frame of a GIF), `text.enabled`, `rectangles.enabled`, `player-heads.enabled`, `progress-bars.enabled`.
+  - Texts: `placeholders.enabled` (built-in placeholders), `countdowns.enabled`.
+  - Clicks: `click-areas.enabled`.
+  - Polls: `polls.deadlines.enabled` (off: deadlines are kept but do not close a poll).
+  - Tutorial: `tutorial.enabled` (needs a restart).
+  - Keys that already existed keep their names and are now listed as switches too: `placeholderapi`, `leaderboards.player-menu`, `leaderboards.seed-offline-stats`, `polls.allow-change`, `defaults.glow`.
+- A switched-off feature answers one shared message, "This feature is switched off on this server.", and its subcommands are hidden from help and tab completion. A feature that needs another switch says which one (page buttons need `pages.enabled` and `per-player.enabled`). Boards, rankings, votes and guestbooks stay saved and work again when the switch is back on.
+- Tab completion and help follow a switch at once, without registering the command again.
+- Placeholders: the plugin registers its values with Vystorm Core under the namespace `boards`: votes, vote shares, the viewer's vote, open polls, guestbook entries, the viewer's place and value in a ranking, names and values on each place, and the number of boards. Examples: `%vystorm_boards_votes_event_pvp%` (votes for the option pvp of the poll event) and `{boards:rank:play_one_minute}` (the viewer's place in the playtime ranking). They work wherever Core or PlaceholderAPI resolves placeholders; `/vadmin placeholders boards` lists them. A value of a switched-off feature is empty.
+- Fixed: a guestbook line could contain placeholders such as `%vystorm_core_player%` or `{player}` that were then filled in for every viewer of the board. Guestbook lines are now put into the text last and are always shown exactly as the player wrote them; formatting tags were already removed when the line was written.
+
+## 1.18.1 — 2026-11-18
+
+- Fixed: left click on a board's click area did nothing when boards are shown as real item frames (`render-mode: entities`, also the fallback on Spigot).
+
 ## 1.18.0 — 2026-11-17
 
 - Requires Vystorm Core 0.64.0 or newer. Update Core before you update this plugin.

@@ -1,6 +1,65 @@
 # Vystorm Boards
 # Boards themselves live in boards.yml (one entry per board, edit and /boards reload).
 # Images go into plugins/VystormBoards/images/ (PNG, JPG, GIF first frame).
+#
+# Every feature has an on/off switch below (all on by default). They are listed in Vystorm Core's /vadmin features
+# and apply at once without a restart, except tutorial.enabled. A switched-off feature does nothing, its commands
+# answer "This feature is switched off on this server." and its placeholders are empty. Saved data (boards.yml,
+# rankings, votes, guestbooks) is always kept and used again when the switch is turned back on.
+
+# The whole plugin. Off: no board is drawn or clickable, packet boards disappear, item frames stay on the walls
+# (blank, still protected while frame-protection is on), and every /boards command except reload is switched off.
+boards:
+  enabled: true
+
+# Board frames cannot be broken, hit, turned or emptied. Off: they are ordinary item frames that anyone allowed to
+# build there can break or take the map from (removing such a frame does not remove the board from boards.yml).
+frame-protection:
+  enabled: true
+
+# Element types. Off: elements of that type are not drawn; they stay in boards.yml.
+images:
+  # Pictures from images/ (and Snapshot photo slideshows).
+  enabled: true
+# Animated GIFs play. Off: a GIF shows its first frame only.
+animated-images:
+  enabled: true
+text:
+  # Text elements.
+  enabled: true
+rectangles:
+  # Coloured rectangles.
+  enabled: true
+player-heads:
+  # Player faces (head elements and the faces in rankings).
+  enabled: true
+progress-bars:
+  # Progress bars.
+  enabled: true
+
+# Built-in placeholders {player} {world} {online} {max} {time} {date} {board} {page} {pages} in board texts.
+# Off: they stay in the text as written.
+placeholders:
+  enabled: true
+# Countdowns {countdown:DATE|TEXT}. Off: they stay in the text as written.
+countdowns:
+  enabled: true
+
+# Boards with viewer data ({player}, the viewer's head, permission elements, navigation) are drawn per player.
+# Off: every board is drawn once for everyone; viewer values stay blank, elements with a permission are hidden and page
+# navigation answers that it needs per-player.enabled.
+per-player:
+  enabled: true
+
+# Boards with pages rotate through them. Off: every board shows its first page only; page navigation answers that it
+# needs pages.enabled.
+pages:
+  enabled: true
+
+# Click areas (commands, messages, votes, guestbooks, page buttons). Off: clicking a board only answers that the feature
+# is switched off; polls, guestbooks and page navigation need this switch.
+click-areas:
+  enabled: true
 
 # Animated GIF images run at most this many frames per second (map updates cost bandwidth).
 animation-fps: 4
@@ -14,13 +73,19 @@ animation-fps: 4
 # packet-view-distance. Switching to packets removes a board's item frames, switching back to entities hangs them again.
 render-mode: auto
 packet-view-distance: 48
+# Packet mode. Off: works like render-mode: entities (real item frames), whatever render-mode says.
+packet-mode:
+  enabled: true
+# /boards render shows the render mode and Core's packet counters. Off: the command is switched off.
+render-diagnostics:
+  enabled: true
 
 # Use PlaceholderAPI placeholders (%...%) in board texts when PlaceholderAPI is installed.
 placeholderapi: true
 
 # Defaults for /boards create
 defaults:
-  # Glow item frames show maps at full brightness, also at night and in caves.
+  # Glow item frames show maps at full brightness, also at night and in caves. Off: new boards use normal frames.
   glow: true
   background: "#252a33"
 
@@ -43,6 +108,10 @@ polls:
   enabled: true
   # Players may move their vote by clicking another option.
   allow-change: true
+  # Poll deadlines (/boards deadline).
+  deadlines:
+    # A poll closes by itself at its deadline. Off: deadlines are kept but ignored and /boards deadline is switched off.
+    enabled: true
 
 guestbooks:
   # Guestbook boards: a click area with "guestbook: ID" opens a dialog where players write one short line (60
@@ -75,4 +144,8 @@ page-navigation:
 # Page editor with private preview: /boards edit NAME (and /boards without arguments) for admins.
 page-editor:
   # Open the editor. Off: open drafts end unsaved, /boards shows the board list; boards are still edited in boards.yml.
+  enabled: true
+
+# Tutorial in the Vystorm Core main menu (/vmenu -> Tutorials). Needs a server restart to apply.
+tutorial:
   enabled: true

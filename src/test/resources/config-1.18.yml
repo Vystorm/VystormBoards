@@ -1,0 +1,78 @@
+# Vystorm Boards
+# Boards themselves live in boards.yml (one entry per board, edit and /boards reload).
+# Images go into plugins/VystormBoards/images/ (PNG, JPG, GIF first frame).
+
+# Animated GIF images run at most this many frames per second (map updates cost bandwidth).
+animation-fps: 4
+
+# How boards are shown:
+#   auto     - client-only packets when Vystorm Core supports them on this server (Paper/Purpur 1.21.8 - 26.2),
+#              otherwise real item frames
+#   packets  - like auto, but warns in the console when it has to fall back to item frames
+#   entities - real item frames and maps (the behaviour before 1.2.0)
+# Packets: no item frame entities and no server-side map rendering; players only get the boards within
+# packet-view-distance. Switching to packets removes a board's item frames, switching back to entities hangs them again.
+render-mode: auto
+packet-view-distance: 48
+
+# Use PlaceholderAPI placeholders (%...%) in board texts when PlaceholderAPI is installed.
+placeholderapi: true
+
+# Defaults for /boards create
+defaults:
+  # Glow item frames show maps at full brightness, also at night and in caves.
+  glow: true
+  background: "#252a33"
+
+# Rankings: board elements with "type: top" (see boards.yml), e.g. playtime, kills or a PlaceholderAPI balance.
+leaderboards:
+  # Draw rankings and collect their values.
+  enabled: true
+  # How often the values of online players are read for stat: and placeholder: rankings (seconds).
+  sample-seconds: 60
+  # When a stat: ranking is used for the first time, read the saved statistics of offline players once.
+  seed-offline-stats: true
+  # Players kept per ranking (the ones not seen the longest are dropped first).
+  max-players: 1000
+  # "Rankings" entry in the Vystorm Core player menu (sneak + right-click a player).
+  player-menu: true
+
+# Polls: click areas with "vote: poll:option" let players vote right on the board (see boards.yml).
+polls:
+  # Accept votes and fill the {votes:...} placeholders.
+  enabled: true
+  # Players may move their vote by clicking another option.
+  allow-change: true
+
+guestbooks:
+  # Guestbook boards: a click area with "guestbook: ID" opens a dialog where players write one short line (60
+  # characters, plain text). Texts show the newest entries with {guestbook:ID:1} (newest), {guestbook:ID:2:name},
+  # {guestbook:ID:2:text} and {guestbook:ID:count}. Admins clean up with /boards guestbook ID. Saved in guestbooks.yml.
+  enabled: true
+  # Seconds a player waits between two entries (admins do not wait).
+  cooldown-seconds: 60
+
+# Photo slideshow boards: an image element with file "snapshot:gallery" (photos on show in VystormSnapshot's gallery),
+# "snapshot:newest" or "snapshot:player:NAME" shows those photos one after another. New photos appear within a minute.
+snapshot-photos:
+  # Show Snapshot photos on boards and allow /boards photos. Off: those image elements stay empty; boards.yml is kept.
+  enabled: true
+  # Seconds each photo stays (2-600).
+  seconds: 8
+  # Most photos in one slideshow (1-120).
+  max: 30
+
+# In-game clock: {world_time} in a board text shows the viewer's Minecraft world time (06:00 at sunrise).
+world-clock:
+  # Fill {world_time}. Off: the placeholder is left blank.
+  enabled: true
+
+# Personal page navigation: click areas with "navigate: next|previous|auto|NUMBER" let each player browse a board's pages.
+page-navigation:
+  # Accept navigation clicks. Off: the buttons answer that the feature is off and every viewer follows the rotation.
+  enabled: true
+
+# Page editor with private preview: /boards edit NAME (and /boards without arguments) for admins.
+page-editor:
+  # Open the editor. Off: open drafts end unsaved, /boards shows the board list; boards are still edited in boards.yml.
+  enabled: true

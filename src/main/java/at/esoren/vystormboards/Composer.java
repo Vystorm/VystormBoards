@@ -45,6 +45,11 @@ public final class Composer {
 
     public void rankings(Rankings rankings) { this.rankings = rankings; }
 
+    /** Feature switches for element types (images, GIF animation, text, rectangles, heads, progress bars); all on by default. */
+    private Feature.Switches switches = Feature.Switches.without();
+
+    void switches(Feature.Switches switches) { this.switches = switches == null ? Feature.Switches.without() : switches; }
+
     /**
      * @param images image files fitted to their boxes
      * @param faces  player name (empty = viewer, already resolved by the caller) → 8×8 face, or null if unknown
@@ -61,6 +66,7 @@ public final class Composer {
 
     /** Frame of an animated image at {@code now}; animations run at most {@code maxFps} frames per second. */
     public int frame(String file, long now, int maxFps) {
+        if (!switches.on(Feature.ANIMATIONS)) return 0;
         return images.frame(file, now, maxFps);
     }
 
@@ -101,12 +107,14 @@ public final class Composer {
                 if (has != negate) draw(g, gated.element(), placeholders, viewer, allowed, now, width, height);
             }
             case Board.Rect rect -> {
+                if (!switches.on(Feature.RECTANGLES)) return;
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, rect.alpha() / 100f));
                 g.setColor(new Color(rect.rgb()));
                 g.fillRect(rect.x(), rect.y(), rect.w(), rect.h());
                 g.setComposite(AlphaComposite.SrcOver);
             }
             case Board.Progress bar -> {
+                if (!switches.on(Feature.PROGRESS)) return;
                 double max = Board.number(placeholders.apply(bar.max()));
                 double value = Board.number(placeholders.apply(bar.value()));
                 g.setColor(new Color(bar.backgroundRgb()));
@@ -114,15 +122,16 @@ public final class Composer {
                 g.setColor(new Color(bar.rgb()));
                 g.fillRect(bar.x(), bar.y(), fill(value, max, bar.w()), bar.h());
             }
-            case Board.Image image -> drawImage(g, image, width, height, now);
+            case Board.Image image -> { if (switches.on(Feature.IMAGES)) drawImage(g, image, width, height, now); }
             case Board.Head head -> {
+                if (!switches.on(Feature.HEADS)) return;
                 BufferedImage face = faces.apply(head.player().isBlank() ? viewer : head.player());
                 if (face != null) {
                     g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
                     g.drawImage(face, head.x(), head.y(), head.size(), head.size(), null);
                 }
             }
-            case Board.Text text -> drawText(g, text, placeholders.apply(text.text()), width);
+            case Board.Text text -> { if (switches.on(Feature.TEXT)) drawText(g, text, placeholders.apply(text.text()), width); }
             case Board.Top top -> drawTop(g, top, viewer, width);
         }
     }
@@ -161,7 +170,7 @@ public final class Composer {
             g.setColor(new Color(rankColor));
             g.drawString("#" + ranked.rank(), top.x(), baseline);
             int cursor = top.x() + rankWidth;
-            if (top.heads()) {
+            if (top.heads() && switches.on(Feature.HEADS)) {
                 BufferedImage face = faces.apply(ranked.name());
                 int faceSize = Math.max(8, size);
                 if (face != null) g.drawImage(face, cursor, top0 + (rowHeight - faceSize) / 2 - size / 10, faceSize, faceSize, null);

@@ -166,7 +166,7 @@ commands:
 navigation-invalid: <red>Este botão de página tem um alvo inválido ou o quadro não tem páginas.
 navigation-auto: <green>A rotação automática da página foi retomada.
 navigation-page: <gray>Página {page} de {pages}.
-feature-off: <red>Este recurso está desativado neste servidor.
+feature-off: "<red>Este recurso está desligado neste servidor."
 
 # Free feature release: editor
 editor:
@@ -235,3 +235,47 @@ panel:
   remove-element-confirm: "Remover este elemento do rascunho?"
   remove-page-confirm: "Remover esta página e seus elementos do rascunho?"
   discard-confirm: "Descartar todas as alterações não salvas?"
+feature-needs: "<red>Isto precisa do interruptor {switch}, que está desligado neste servidor."
+switches:
+  boards: "O plugin inteiro: os painéis são desenhados e reagem a cliques"
+  frame-protection: "As molduras dos painéis não podem ser quebradas, golpeadas, giradas ou esvaziadas"
+  images: "Elementos de imagem e apresentações de fotos do Snapshot"
+  animations: "GIFs animados tocam (desligado: só o primeiro quadro)"
+  text: "Elementos de texto"
+  rectangles: "Retângulos coloridos"
+  heads: "Rostos de jogadores em cabeças e rankings"
+  progress: "Barras de progresso"
+  placeholders: "Placeholders embutidos como nome do jogador e jogadores online"
+  countdowns: "Contagens regressivas nos textos"
+  placeholderapi: "Placeholders do PlaceholderAPI nos textos"
+  per-player: "Painéis com dados de quem olha são desenhados por jogador"
+  pages: "Os painéis alternam entre suas páginas"
+  clicks: "Áreas de clique: comandos, mensagens, votos, livros de visitas, botões de página"
+  packets: "Painéis como pacotes só no cliente (desligado: molduras reais)"
+  rankings: "Rankings nos painéis e /boards top"
+  rankings-menu: "Entrada Rankings no menu de jogador do Core"
+  offline-stats: "Ler as estatísticas salvas de jogadores offline"
+  polls: "Enquetes: votos nos painéis e /boards poll"
+  vote-change: "Jogadores podem mudar o voto"
+  poll-deadlines: "Enquetes fecham sozinhas no prazo"
+  guestbooks: "Livros de visitas: jogadores deixam uma linha num painel"
+  photos: "Apresentações do Snapshot e /boards photos"
+  clock: "Relógio do jogo nos textos"
+  navigation: "Navegação pessoal com botões de página"
+  editor: "Editor de páginas com prévia privada"
+  render-info: "Diagnóstico de exibição com /boards render"
+  tutorial: "Tutorial no menu principal (precisa reiniciar)"
+  glow: "Novos painéis usam molduras brilhantes"
+placeholder:
+  votes: "Votos de uma enquete ou de uma opção"
+  votes_percent: "Parte de uma opção em por cento"
+  vote: "Opção votada pelo jogador, ou -"
+  poll_open: "true ou false: a enquete aceita votos"
+  guestbook_count: "Entradas de um livro de visitas"
+  guestbook_name: "Autor da n-ésima entrada mais nova"
+  guestbook_text: "Texto da n-ésima entrada mais nova"
+  rank: "Posição do jogador num ranking"
+  rank_value: "Valor do jogador num ranking"
+  top_name: "Nome numa posição de um ranking"
+  top_value: "Valor numa posição de um ranking"
+  board_count: "Painéis carregados"

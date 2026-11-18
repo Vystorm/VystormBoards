@@ -168,7 +168,7 @@ commands:
 navigation-invalid: <red>Ce bouton de page a une cible invalide ou le tableau n'a pas de pages.
 navigation-auto: <green>La rotation automatique des pages a repris.
 navigation-page: <gray>Page {page} du {pages}.
-feature-off: <red>Cette fonctionnalité est désactivée sur ce serveur.
+feature-off: "<red>Cette fonctionnalité est désactivée sur ce serveur."
 
 # Free feature release: editor
 editor:
@@ -237,3 +237,47 @@ panel:
   remove-element-confirm: "Supprimer cet élément du brouillon ?"
   remove-page-confirm: "Supprimer cette page et ses éléments du brouillon ?"
   discard-confirm: "Abandonner toutes les modifications non enregistrées ?"
+feature-needs: "<red>Il faut pour cela l'interrupteur {switch}, désactivé sur ce serveur."
+switches:
+  boards: "Tout le plugin : les panneaux sont dessinés et réagissent aux clics"
+  frame-protection: "Les cadres des panneaux ne peuvent être cassés, frappés, tournés ni vidés"
+  images: "Éléments image et diaporamas de photos Snapshot"
+  animations: "Les GIF animés jouent (désactivé : première image seulement)"
+  text: "Éléments de texte"
+  rectangles: "Rectangles colorés"
+  heads: "Visages des joueurs dans les têtes et les classements"
+  progress: "Barres de progression"
+  placeholders: "Variables intégrées comme le nom du joueur et le nombre en ligne"
+  countdowns: "Comptes à rebours dans les textes"
+  placeholderapi: "Variables PlaceholderAPI dans les textes"
+  per-player: "Les panneaux avec des données du joueur sont dessinés par joueur"
+  pages: "Les panneaux font défiler leurs pages"
+  clicks: "Zones de clic : commandes, messages, votes, livres d'or, boutons de page"
+  packets: "Panneaux en paquets côté client (désactivé : vrais cadres)"
+  rankings: "Classements sur les panneaux et /boards top"
+  rankings-menu: "Entrée Classements dans le menu joueur de Core"
+  offline-stats: "Lire les statistiques enregistrées des joueurs hors ligne"
+  polls: "Sondages : votes sur les panneaux et /boards poll"
+  vote-change: "Les joueurs peuvent changer leur vote"
+  poll-deadlines: "Les sondages se ferment seuls à leur échéance"
+  guestbooks: "Livres d'or : les joueurs laissent une ligne sur un panneau"
+  photos: "Diaporamas Snapshot et /boards photos"
+  clock: "Horloge du jeu dans les textes"
+  navigation: "Navigation personnelle avec des boutons de page"
+  editor: "Éditeur de pages avec aperçu privé"
+  render-info: "Diagnostic d'affichage avec /boards render"
+  tutorial: "Tutoriel dans le menu principal (redémarrage nécessaire)"
+  glow: "Les nouveaux panneaux utilisent des cadres lumineux"
+placeholder:
+  votes: "Votes d'un sondage ou d'une option"
+  votes_percent: "Part d'une option en pour cent"
+  vote: "Option choisie par le joueur, ou -"
+  poll_open: "true ou false : le sondage accepte des votes"
+  guestbook_count: "Entrées d'un livre d'or"
+  guestbook_name: "Auteur de la n-ième entrée la plus récente"
+  guestbook_text: "Texte de la n-ième entrée la plus récente"
+  rank: "Place du joueur dans un classement"
+  rank_value: "Valeur du joueur dans un classement"
+  top_name: "Nom à une place d'un classement"
+  top_value: "Valeur à une place d'un classement"
+  board_count: "Panneaux chargés"

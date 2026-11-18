@@ -95,8 +95,15 @@ public final class Polls {
 
     public boolean closed(String poll) {
         Poll state = polls.get(poll);
-        return state != null && (state.closed || state.deadline > 0 && now.getAsLong() >= state.deadline);
+        return state != null && (state.closed || deadlinesOn && state.deadline > 0 && now.getAsLong() >= state.deadline);
     }
+
+    /** polls.deadlines.enabled: while off a passed deadline does not close the poll; stored deadlines are kept. */
+    private boolean deadlinesOn = true;
+
+    void deadlines(boolean on) { deadlinesOn = on; }
+
+    boolean deadlinesOn() { return deadlinesOn; }
 
     public long deadline(String poll) { Poll state = polls.get(poll); return state == null ? 0 : state.deadline; }
 

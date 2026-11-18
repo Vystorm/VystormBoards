@@ -44,7 +44,7 @@ final class PacketBoards {
         var wall = displays.mapWall(plugin, spec);
         if (wall.isEmpty()) return false;
         wall.get().onClick(c -> click.accept(c.player(), runtime));
-        shown.put(board.name.toLowerCase(java.util.Locale.ROOT), new Shown(runtime, wall.get(), board.perPlayer(), new HashMap<>()));
+        shown.put(board.name.toLowerCase(java.util.Locale.ROOT), new Shown(runtime, wall.get(), runtime.perPlayer(), new HashMap<>()));
         return true;
     }
 
