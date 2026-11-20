@@ -25,13 +25,14 @@ click-cooldown: <red>Ainda não. Tente novamente em {seconds} s.
 top-disabled: <red>Os rankings estão desligados (leaderboards.enabled em config.yml).
 top-list-header: <gold>Rankings em suas pranchas ({count}):</gold> <gray>Clique em um para ver os primeiros lugares
 top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> - {players} jogadores
-top-unknown: <red>Fonte de classificação desconhecida {source}. Use estat:NAME, substituto:%...% ou objetivo:NAME.
+top-unknown: "<red>Fonte de classificação desconhecida {source}. Use stat:NAME, placeholder:%...%, objective:NAME ou minigames:PERCURSO."
 top-header: <gold>{name}</gold> <dark_gray>({source}, {players} jogadores)
 top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
 top-empty: <gray>Nenhum valor ainda - eles são coletados enquanto os jogadores estão online.
 top-reset-ask: <yellow>Esquecer todos os valores armazenados de {source}?
 top-reset: <green>Ranking {source} reset, enche novamente de jogadores online e estatísticas salvas.
 top-reset-objective: <red>Os rankings do placar vêm ao vivo do placar, redefinir o objetivo lá.
+top-reset-minigames: "<red>Os tempos de percurso vêm do Vystorm Minigames; redefina-os lá."
 rankings-header: '<gold>Rankings de {player}:'
 rankings-none: <gray>Ainda não está em nenhum ranking.
 rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'

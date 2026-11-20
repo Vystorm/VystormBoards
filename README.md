@@ -41,9 +41,17 @@ elements:
   - {type: top, source: "objective:kills", rows: 5, order: highest}
 ```
 
-- **Sources:** `stat:NAME` for any Minecraft statistic (`PLAY_ONE_MINUTE`, `PLAYER_KILLS`, `DEATHS`, `JUMP`, `MINE_BLOCK:DIAMOND_ORE`, `KILL_ENTITY:ZOMBIE` …), `placeholder:%…%` for any PlaceholderAPI number, `objective:NAME` for a scoreboard objective (live).
+- **Sources:** `stat:NAME` for any Minecraft statistic (`PLAY_ONE_MINUTE`, `PLAYER_KILLS`, `DEATHS`, `JUMP`, `MINE_BLOCK:DIAMOND_ORE`, `KILL_ENTITY:ZOMBIE` …), `placeholder:%…%` for any PlaceholderAPI number, `objective:NAME` for a scoreboard objective (live), `minigames:COURSE` for the best times of a Vystorm Minigames course.
 - Statistic and placeholder values are read from online players every `sample-seconds` and when they leave, and kept in `leaderboards.yml`, so the ranking also lists offline players. The first time a statistic ranking is used, the saved statistics of offline players are read once (spread over several ticks), so playtime rankings are complete right away.
-- **Options:** `rows` (1-50), `size`, `color`, `value-color`, `format` (`number`, `decimal`, `time` for statistic ticks, `seconds`, `distance` for centimetre statistics), `order: lowest` (smallest value first), `heads`, `medals`, `font`, `label` (name in chat and menus) and `highlight: true` (the viewer's row is yellow and their own place is added below the list; makes the board per player).
+- **Course times from Vystorm Minigames (1.20.0):** `source: "minigames:COURSE"` shows the best times of a jump and run course, fastest first, offline players included. Vystorm Minigames is a coming plugin that is not released yet, so this ranking stays empty until it is. Boards reads them on the same `sample-seconds` timer; Minigames is no dependency, and while it is not installed or knows no such course the ranking stays empty (one line in the console per source). Boards keeps no copy of these times, so `/boards top minigames:COURSE reset` only tells you to reset them in Minigames. Example:
+
+```yaml
+elements:
+  - {type: text, text: "<gold>Spawn run", x: 16, y: 12, size: 22}
+  - {type: top, source: "minigames:spawn_run", x: 16, y: 48, width: 480, rows: 10, size: 18, format: duration, highlight: true, label: "Spawn run"}
+```
+
+- **Options:** `rows` (1-50), `size`, `color`, `value-color`, `format` (`number`, `decimal`, `time` for statistic ticks, `seconds`, `distance` for centimetre statistics, `duration` for milliseconds shown as `1:01.234`, from one hour on `1:02:03.456`), `order` (`descending` or `highest`: largest value first, the default; `ascending` or `lowest`: smallest value first, the default for `minigames:` sources), `heads`, `medals`, `font`, `label` (name in chat and menus) and `highlight: true` (the viewer's row is yellow and their own place is added below the list; makes the board per player).
 - `/boards top` lists the rankings on your boards (click one), `/boards top SOURCE` shows the first ten in chat, `/boards top SOURCE reset` forgets the stored values.
 - **Player menu**: sneak and right-click a player to see their places in all rankings.
 

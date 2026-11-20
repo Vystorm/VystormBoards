@@ -25,13 +25,14 @@ click-cooldown: <red>Non ancora – riprovare in {seconds} s.
 top-disabled: <red>Le classifiche sono spente (leaderboards.enabled nel config.yml).
 top-list-header: <gold>Classifica sulle tue tavole ({count}):</gold> <gray>clicca uno per vedere i primi posti
 top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} giocatori
-top-unknown: <red>Fonte di classifica sconosciuta {source}. Utilizzare stat:NAME, segnaposto:%...% o obiettivo:NAME.
+top-unknown: "<red>Fonte di classifica sconosciuta {source}. Usa stat:NAME, placeholder:%...%, objective:NAME o minigames:PERCORSO."
 top-header: <gold>{name}</gold> <dark_gray>({source}, {players} giocatori)
 top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
 top-empty: <gray>Nessun valore ancora – sono raccolti mentre i giocatori sono online.
 top-reset-ask: <yellow>Dimentica tutti i valori memorizzati di {source}?
 top-reset: <green>Ranking {source} reset; si riempie di nuovo da giocatori online e statistiche salvate.
 top-reset-objective: <red>Le classifiche dello scoreboard vengono dal vivo dal tabellone; resettare l'obiettivo lì.
+top-reset-minigames: "<red>I tempi dei percorsi vengono da Vystorm Minigames; azzerali lì."
 rankings-header: '<gold>Classifiche di {player}:'
 rankings-none: <gray>Non in nessun posto.
 rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'

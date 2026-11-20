@@ -25,13 +25,14 @@ click-cooldown: <red>Еще нет - попробуйте еще раз в {seco
 top-disabled: <red>Рейтинги выключены (leaderboards.enabled в config.yml).
 top-list-header: <gold>Рейтинги на досках ({count}):</gold> <gray>Нажмите один, чтобы увидеть первые места
 top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> {players} игроков
-top-unknown: <red>Неизвестный источник {source}. Используйте stat:NAME, заполнитель:%...% или объектив:NAME.
+top-unknown: "<red>Неизвестный источник рейтинга {source}. Используйте stat:NAME, placeholder:%...%, objective:NAME или minigames:ТРАССА."
 top-header: <gold>{name}</gold> <dark_gray>({source}, {players} игроков)
 top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
 top-empty: <gray>Ценностей пока нет — они собираются, пока игроки онлайн.
 top-reset-ask: <yellow>Забыли все сохраненные значения {source}?
 top-reset: <green>Рейтинг {source} сбрасывается; он снова заполняется от онлайн-игроков и сохраняет статистику.
 top-reset-objective: <red>Рейтинги Scoreboard приходят в прямом эфире с табло; сбросить цель там.
+top-reset-minigames: "<red>Время прохождения трасс приходит из Vystorm Minigames; сбросьте его там."
 rankings-header: '<gold>Рейтинги {player}:'
 rankings-none: <gray>Пока нет ни одного рейтинга.
 rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'

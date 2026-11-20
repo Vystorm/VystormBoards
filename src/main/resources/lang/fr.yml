@@ -25,7 +25,7 @@ click-cooldown: <red>Pas encore – essayez à nouveau dans {seconds} s.
 top-disabled: <red>Les classements sont désactivés (leaderboards.enabled en config.yml).
 top-list-header: <gold>Classements sur vos tableaux ({count}):</gold> <gray>cliquez sur un pour voir les premiers endroits
 top-list-entry: <gray>- <yellow>{name}</yellow> <dark_gray>{source}</dark_gray> – {players} joueurs
-top-unknown: <red>Source de classement inconnue {source}. Stat:NAME, titulaire:%...% ou objectif:NAME.
+top-unknown: "<red>Source de classement inconnue {source}. Utilisez stat:NAME, placeholder:%...%, objective:NAME ou minigames:PARCOURS."
 top-header: <gold>{name}</gold> <dark_gray>({source}, {players} joueurs)
 top-entry: <gray>#{rank} <white>{name}</white> <yellow>{value}
 top-empty: <gray>Aucune valeur encore – ils sont collectés pendant que les joueurs sont en ligne.
@@ -33,6 +33,7 @@ top-reset-ask: <yellow>Oubliez toutes les valeurs stockées de {source} ?
 top-reset: <green>Classement {source} réinitialiser; il remplit à nouveau des joueurs en ligne et des statistiques enregistrées.
 top-reset-objective: <red>Les classements du tableau de bord viennent en direct du tableau de bord; réinitialisez l'objectif
   là-bas.
+top-reset-minigames: "<red>Les temps de parcours viennent de Vystorm Minigames ; réinitialisez-les là-bas."
 rankings-header: '<gold>Classement de {player}:'
 rankings-none: <gray>Pas encore dans un classement.
 rankings-line: '<gray>- {name}: <yellow>#{rank}</yellow> ({value})'

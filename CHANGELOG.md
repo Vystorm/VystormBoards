@@ -1,3 +1,11 @@
+## 1.20.0 — 2026-11-20
+
+- Rankings can show the best times of a Vystorm Minigames course: `source: "minigames:COURSE"` in a `top` element, for example `{type: top, source: "minigames:spawn_run", rows: 10, format: duration, highlight: true}`. The fastest time comes first, and players who are offline stay in the list. The times are read on the same `leaderboards.sample-seconds` timer as the other rankings. Minigames is no dependency: without it, or for a course it does not know, the ranking stays empty and the console names the source once. If Minigames is started after Boards, its times appear at the next sample. Faces, medals and `highlight: true` work as in every other ranking. Vystorm Minigames is a coming plugin that is not released yet, so a `minigames:` ranking stays empty until it is.
+- New `order` values for every ranking: `ascending` puts the smallest value first (the same as `lowest`), `descending` the largest (the same as `highest`, still the default). Rankings from `minigames:` start with the smallest value unless `order` says otherwise.
+- New `format: duration` for values in milliseconds: 61234 is shown as `1:01.234`, 999 as `0:00.999`, and from one hour on with hours, such as `1:02:03.456`. The other formats are unchanged.
+- The message for an unknown ranking source now lists `minigames:` as well, and in French, Italian, Brazilian Portuguese and Russian it shows the source names as you type them.
+- Still works with Vystorm Core 0.65.0 or newer.
+
 ## 1.19.1 — 2026-11-20
 
 - `/boards reload` with a YAML syntax error in `config.yml` keeps the last working settings and boards instead of falling back to the defaults, and answers with the line and column of the error (also shown in the console, as on start). The file is never changed.

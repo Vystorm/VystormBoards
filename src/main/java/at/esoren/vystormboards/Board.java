@@ -28,8 +28,8 @@ public final class Board {
     public record Head(int x, int y, int size, String player) implements Element {}
 
     /**
-     * A ranking ({@code source}: stat:…, placeholder:…, objective:…) drawn as {@code rows} lines of rank, face, name and
-     * value. {@code lowest} ranks the smallest value first; {@code highlight} marks the viewer and adds their own place
+     * A ranking ({@code source}: stat:…, placeholder:…, objective:…, minigames:…) drawn as {@code rows} lines of rank, face,
+     * name and value. {@code lowest} ranks the smallest value first; {@code highlight} marks the viewer and adds their own place
      * below the list when they are not in it (makes the board per player). {@code label} names it in menus and chat.
      */
     public record Top(String source, int x, int y, int w, int rows, int size, int rgb, int valueRgb, boolean heads, boolean medals,
@@ -247,7 +247,7 @@ public final class Board {
                 case "top", "leaderboard" -> new Top(e.getString("source", "").trim(), ex, ey, e.getInt("width", 0), Math.clamp(e.getInt("rows", 5), 1, 50),
                         Math.clamp(e.getInt("size", 16), 6, 128), color(e.getString("color"), 0xFFFFFF), color(e.getString("value-color"), 0xE3B04B),
                         e.getBoolean("heads", true), e.getBoolean("medals", true), e.getString("format", "number"),
-                        "lowest".equalsIgnoreCase(e.getString("order", "highest")), e.getBoolean("highlight", false),
+                        lowestFirst(e.getString("order"), e.getString("source", "")), e.getBoolean("highlight", false),
                         e.getString("font", "SansSerif"), e.getString("label", ""));
                 default -> {
                     Align align;
@@ -261,6 +261,19 @@ public final class Board {
             elements.add(permission.isBlank() ? element : new Gated(permission.trim(), element));
         }
         return elements;
+    }
+
+    /**
+     * {@code order} of a top element: ascending/lowest = smallest value first, descending/highest = largest first.
+     * Without (or with an unknown) order, minigames: sources (course times) start with the lowest, all others with the highest.
+     */
+    static boolean lowestFirst(String order, String source) {
+        String value = order == null ? "" : order.trim().toLowerCase(Locale.ROOT);
+        return switch (value) {
+            case "ascending", "lowest" -> true;
+            case "descending", "highest" -> false;
+            default -> Leaderboards.kind(source == null ? "" : source.trim()).equals("minigames");
+        };
     }
 
     /** Number from a resolved placeholder text ("1,234.5", "42%" …); 0 when there is none. */

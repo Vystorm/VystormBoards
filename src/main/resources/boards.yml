@@ -11,8 +11,10 @@
 #   - type: progress  x, y, width, height, value, max (placeholders allowed, e.g. "%vault_eco_balance%" / "10000"),
 #                  color, background
 #   - type: top    a ranking: source ("stat:PLAY_ONE_MINUTE", "stat:MINE_BLOCK:DIAMOND_ORE", "placeholder:%vault_eco_balance%",
-#                  "objective:kills"), x, y, width, rows, size, color, value-color, format (number/decimal/time/seconds/distance),
-#                  order (highest/lowest), heads, medals, highlight (viewer's row and own place), label, font
+#                  "objective:kills", "minigames:COURSE" for the best times of a Vystorm Minigames course), x, y, width, rows,
+#                  size, color, value-color, format (number/decimal/time/seconds/distance/duration), order (descending or
+#                  highest, ascending or lowest; minigames: sources start with the lowest), heads, medals,
+#                  highlight (viewer's row and own place), label, font
 #
 # Any element can have "permission: vip.rank" (shown only to players with it) or "permission: '!vip.rank'" (only without).
 # Texts shrink to fit their box (width) unless "fit: false". GIF images are animated (see animation-fps in config.yml).

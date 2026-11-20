@@ -105,6 +105,9 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
     /** Ranking sources in use (first top element per source), stat/placeholder sources that get sampled. */
     private final Map<String, Board.Top> rankingTops = new LinkedHashMap<>();
     private final Set<String> sampled = new HashSet<>();
+    /** minigames:COURSE sources in use: read from Vystorm Minigames on the same timer as the sampled ones. */
+    private Set<String> courseSources = new HashSet<>();
+    private MinigamesSource minigames = new MinigamesSource(Bukkit::getServicesManager, this::getLogger);
     private final Set<String> badSources = new HashSet<>();
     /** Poll ids used by click areas on the boards (shown in /boards poll before the first vote). */
     private final Set<String> boardPolls = new java.util.TreeSet<>();
@@ -298,6 +301,10 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         boards.clear();
         rankingTops.clear();
         sampled.clear();
+        // tests build the plugin without field initialisers: create the Minigames parts here when missing
+        if (courseSources == null) courseSources = new HashSet<>();
+        if (minigames == null) minigames = new MinigamesSource(Bukkit::getServicesManager, this::getLogger);
+        courseSources.clear();
         boardPolls.clear();
         resolveRenderMode();
         double configuredDistance = getConfig().getDouble("packet-view-distance", 48);
@@ -336,9 +343,10 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
                     boards.put(name.toLowerCase(Locale.ROOT), runtime);
                     for (Board.Top top : board.tops()) {
                         String kind = Leaderboards.kind(top.source());
-                        if (kind.isEmpty()) { getLogger().warning("Board '" + name + "': unknown ranking source '" + top.source() + "' (use stat:, placeholder: or objective:)"); continue; }
+                        if (kind.isEmpty()) { getLogger().warning("Board '" + name + "': unknown ranking source '" + top.source() + "' (use stat:, placeholder:, objective: or minigames:)"); continue; }
                         rankingTops.putIfAbsent(top.source(), top);
-                        if (!kind.equals("objective")) sampled.add(top.source());
+                        if (kind.equals("minigames")) courseSources.add(top.source());
+                        else if (!kind.equals("objective")) sampled.add(top.source());
                     }
                     for (Board.Click click : board.clicks) {
                         if (click.vote().isBlank()) continue;
@@ -352,7 +360,8 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
             }
         }
         if (packetMode && packets.count() > 0) tasks.timer(1, 1, packets::tick);
-        if (rankingsOn && !sampled.isEmpty()) {
+        minigames.retain(courseSources);
+        if (rankingsOn && (!sampled.isEmpty() || !courseSources.isEmpty())) {
             int seconds = Math.clamp(getConfig().getInt("leaderboards.sample-seconds", 60), 5, 3600);
             tasks.timer(40, seconds * 20L, this::sample);
             seed();
@@ -541,6 +550,7 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         return switch (Leaderboards.kind(source)) {
             case "stat", "placeholder" -> leaderboards.ranking(source, lowest);
             case "objective" -> objective(source, lowest);
+            case "minigames" -> minigames == null ? List.of() : minigames.ranking(source, lowest);
             default -> List.of();
         };
     }
@@ -568,7 +578,8 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
     /** Takes the current values of all online players for the sampled sources. */
     private void sample() {
         long now = System.currentTimeMillis();
-        for (Player player : Bukkit.getOnlinePlayers()) sample(player, now);
+        if (!sampled.isEmpty()) for (Player player : Bukkit.getOnlinePlayers()) sample(player, now);
+        minigames.sample(courseSources, id -> { Player online = Bukkit.getPlayer(id); return online == null ? null : online.getName(); });
         scheduleSave();
     }
 
@@ -1198,6 +1209,7 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         if (args.length > 2 && args[2].equalsIgnoreCase("reset")) {
             if (unreadable.contains(leaderboardsFile)) { lang.send(sender, "failed"); return; }
             if (Leaderboards.kind(source).equals("objective")) { lang.send(sender, "top-reset-objective"); return; }
+            if (Leaderboards.kind(source).equals("minigames")) { lang.send(sender, "top-reset-minigames"); return; }
             if (args.length < 4 || !args[3].equalsIgnoreCase("confirm")) {
                 core.compat().platform().sendMessage(sender, lang.component(sender, "top-reset-ask", "source", source).append(Component.space())
                         .append(button(sender, "button-confirm", "/boards top " + source + " reset confirm")));

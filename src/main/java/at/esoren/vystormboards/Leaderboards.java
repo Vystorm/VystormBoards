@@ -17,7 +17,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 /**
  * Remembered ranking values for the {@code top} board element (no server, unit-tested). Sources are
  * {@code stat:NAME[:QUALIFIER]} and {@code placeholder:%...%}, sampled from online players and kept for offline ones;
- * {@code objective:NAME} rankings come live from the scoreboard and only use the sorting helpers here.
+ * {@code objective:NAME} rankings come live from the scoreboard and {@code minigames:COURSE} rankings from Vystorm
+ * Minigames ({@link MinigamesSource}); both only use the sorting helpers here.
  */
 public final class Leaderboards {
     /** One player's value in a source; {@code seen} is when it was last sampled (oldest entries go first at the cap). */
@@ -31,14 +32,14 @@ public final class Leaderboards {
     private final Set<String> seeded = new HashSet<>();
     private boolean dirty;
 
-    /** "stat", "placeholder", "objective" or "" for an unknown source. */
+    /** "stat", "placeholder", "objective", "minigames" or "" for an unknown source. */
     public static String kind(String source) {
         if (source == null) return "";
         int colon = source.indexOf(':');
         if (colon <= 0 || colon == source.length() - 1) return "";
         String kind = source.substring(0, colon).toLowerCase(Locale.ROOT);
         return switch (kind) {
-            case "stat", "placeholder", "objective" -> kind;
+            case "stat", "placeholder", "objective", "minigames" -> kind;
             default -> "";
         };
     }
@@ -75,6 +76,21 @@ public final class Leaderboards {
         if (!lowest) byValue = byValue.reversed();
         List<Entry> list = new ArrayList<>(entries);
         list.sort(byValue.thenComparing(entry -> entry.name().toLowerCase(Locale.ROOT)));
+        return places(list);
+    }
+
+    /**
+     * Like {@link #rank} for rows that arrive already in a meaningful order (Minigames: of equal times the earlier one
+     * first): sorted by value only, so equal values keep their order; they still share a rank.
+     */
+    public static List<Ranked> rankInOrder(List<Entry> entries, boolean lowest) {
+        Comparator<Entry> byValue = Comparator.comparingDouble(Entry::value);
+        List<Entry> list = new ArrayList<>(entries);
+        list.sort(lowest ? byValue : byValue.reversed());
+        return places(list);
+    }
+
+    private static List<Ranked> places(List<Entry> list) {
         List<Ranked> out = new ArrayList<>(list.size());
         for (int i = 0; i < list.size(); i++) {
             Entry entry = list.get(i);
@@ -114,7 +130,8 @@ public final class Leaderboards {
 
     /**
      * Value as shown on the board: {@code number} (1,234), {@code decimal} (1,234.56), {@code time} (statistic ticks →
-     * "3d 4h", "2h 5m", "45m"), {@code seconds} (same from seconds), {@code distance} (centimetres → "1.2 km", "340 m").
+     * "3d 4h", "2h 5m", "45m"), {@code seconds} (same from seconds), {@code distance} (centimetres → "1.2 km", "340 m"),
+     * {@code duration} (milliseconds → "1:01.234", from one hour on "1:02:03.456"; course times of Vystorm Minigames).
      */
     public static String format(double value, String format) {
         String kind = format == null ? "number" : format.toLowerCase(Locale.ROOT);
@@ -122,9 +139,17 @@ public final class Leaderboards {
             case "decimal" -> String.format(Locale.ROOT, "%,.2f", value);
             case "time" -> duration((long) (value / 20));
             case "seconds" -> duration((long) value);
+            case "duration" -> millis(Math.round(value));
             case "distance" -> value >= 100_000 ? String.format(Locale.ROOT, "%,.1f km", value / 100_000) : String.format(Locale.ROOT, "%,d m", (long) (value / 100));
             default -> value == Math.rint(value) ? String.format(Locale.ROOT, "%,d", (long) value) : String.format(Locale.ROOT, "%,.1f", value);
         };
+    }
+
+    /** Milliseconds as m:ss.SSS, or h:mm:ss.SSS from one hour on. */
+    static String millis(long millis) {
+        long ms = Math.max(0, millis), hours = ms / 3_600_000, minutes = ms / 60_000 % 60, seconds = ms / 1000 % 60, rest = ms % 1000;
+        if (hours > 0) return String.format(Locale.ROOT, "%d:%02d:%02d.%03d", hours, minutes, seconds, rest);
+        return String.format(Locale.ROOT, "%d:%02d.%03d", minutes, seconds, rest);
     }
 
     static String duration(long seconds) {
