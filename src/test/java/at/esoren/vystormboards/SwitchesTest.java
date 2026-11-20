@@ -70,7 +70,7 @@ class SwitchesTest {
         for (String code : LANGUAGES) {
             YamlConfiguration lang = YamlConfiguration.loadConfiguration(new File("src/main/resources/lang/" + code + ".yml"));
             assertTrue(lang.isString("feature-off"), code);
-            assertTrue(lang.getString("feature-needs").contains("{switch}"), code);
+            assertTrue(lang.getString("feature-needs").matches(".*\\{name}.*\\{switch}.*"), code);
             for (Feature feature : Feature.values()) assertFalse(lang.getString(feature.description(), "").isBlank(), code + " " + feature.description());
             for (String key : List.of("votes", "votes_percent", "vote", "poll_open", "guestbook_count", "guestbook_name", "guestbook_text",
                     "rank", "rank_value", "top_name", "top_value", "board_count"))
@@ -301,8 +301,9 @@ class SwitchesTest {
                     + "clicks: [{x: 0, y: 0, width: 128, height: 128, navigate: next}]\n"));
             BoardRuntime runtime = new BoardRuntime(board, (b, v) -> "", (b, v) -> new byte[16384]);
             Player player = lookingAt(boardFrame());
+            when(lang(p).plain(player, needed.label())).thenReturn("Name of " + needed.path);
             call(p, "click", new Class<?>[]{Player.class, BoardRuntime.class}, player, runtime);
-            verify(lang(p)).send(player, "feature-needs", "switch", needed.path);
+            verify(lang(p)).send(player, "feature-needs", "switch", needed.path, "name", "Name of " + needed.path);
         }
     }
 

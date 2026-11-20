@@ -19,6 +19,7 @@
 - `/boards create … <world> <x> <y> <z> <facing>` from the console, `/boards remove`, `/boards list`, `/boards reload`.
 - Texts in seven languages (`lang/en.yml`, `de`, `fr`, `it`, `pt_br`, `ru` and `zh_cn`) through the Vystorm Core language system (player language, `/vadmin language audit`); `config.yml` is editable in game with `/vadmin config`.
 - Needs [Vystorm Core](https://www.spigotmc.org/resources/139848/) 0.65.0 or newer (free); PlaceholderAPI optional. What the build checks: the plugin is compiled for Java 21 (`--release 21`) against the Paper API 1.21.11 and, in `compat1206`, against Paper 1.20.6; packet mode needs a server where Core supports client-only displays (Paper/Purpur 1.21.8 to 26.2), elsewhere boards use real item frames. Use the Java version your server needs.
+- Tested on Paper and Purpur 26.2, Paper 1.20.6 and Spigot 26.2.
 - On older servers, packet rendering uses real item frames and maps when Core's runtime capability probe cannot support client displays. Board content, GIFs, personal pages, clicks, rankings and polls remain available. Ranking sources for materials, entities or statistics absent on that server are skipped and logged; use sources available on that server.
 
 ## In-game clock

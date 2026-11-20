@@ -62,6 +62,7 @@ class BugFixRegressionTest {
         config.set("placeholderapi", false);
         config.set("leaderboards.enabled", false);
         when(p.getConfig()).thenReturn(config);
+        when(p.readConfig()).thenReturn(true); // config.yml parsed
         set(p, "lang", mock(Lang.class));
         set(p, "core", TestCore.api());
         set(p, "boardsFile", dir.resolve("boards.yml").toFile());

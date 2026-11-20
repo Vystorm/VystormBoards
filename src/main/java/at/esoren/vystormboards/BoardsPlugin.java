@@ -162,7 +162,7 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         handleSharedEvents(core.priority().stages());
         core.settings().config().register(this, "config.yml", this::load);
         core.settings().config().registerAll(this, this::load);
-        declareSwitches();
+        declareSwitches(core.settings().config(), this, lang);
         try { registerPlaceholders(core.placeholders()); }
         catch (RuntimeException failure) { getLogger().log(Level.WARNING, "Placeholders not registered", failure); }
         registerCommands();
@@ -176,11 +176,10 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
     }
 
     /** Every switch in /vadmin features with its one-line description in the admin's language. */
-    private void declareSwitches() {
-        var config = core.settings().config();
+    static void declareSwitches(Vystorm.vystorm_core._uiMethods.settings.ConfigEditorInterface config, org.bukkit.plugin.Plugin plugin, Lang lang) {
         for (Feature feature : Feature.values()) {
-            config.feature(this, feature.path, null, lang.ref(feature.description()));
-            if (feature.needsRestart()) config.activation(this, feature.path, Vystorm.vystorm_core._uiMethods.settings.SettingPolicy.Activation.RESTART);
+            config.feature(plugin, feature.path, lang.ref(feature.label()), lang.ref(feature.description()));
+            if (feature.needsRestart()) config.activation(plugin, feature.path, Vystorm.vystorm_core._uiMethods.settings.SettingPolicy.Activation.RESTART);
         }
     }
 
@@ -232,9 +231,29 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         boards.clear();
     }
 
-    private void load() {
-        navigation.clear();
+    /** The YAML error of config.yml found by the last load ("line L, column C: ..."), null when it parsed. */
+    private String configProblem;
+    private boolean configLoaded;
+
+    /**
+     * Reads config.yml for start and reload. A file with a YAML error is left byte-identical and the error logged once;
+     * false is returned so that a reload keeps the last good settings and boards (Bukkit would hand back the jar defaults).
+     */
+    boolean readConfig() {
+        configProblem = YamlCheck.problem(new File(getDataFolder(), "config.yml"));
+        if (configProblem != null) {
+            getLogger().severe("config.yml has a YAML error at " + configProblem + ". The file was left unchanged; "
+                    + (configLoaded ? "the last working settings stay in use." : "the default settings are used.") + " Fix it and run /boards reload.");
+            return false;
+        }
         reloadConfig();
+        return true;
+    }
+
+    private void load() {
+        if (!readConfig() && configLoaded) return;
+        configLoaded = true;
+        navigation.clear();
         if (lang != null) lang.reload();
         assets.clear();
         fps = Math.clamp(getConfig().getInt("animation-fps", 4), 1, 10);
@@ -977,7 +996,7 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
         if (!area.navigate().isBlank()) {
             if (!navigation.enabled()) { lang.send(player, "feature-off"); return; }
             for (Feature needed : List.of(Feature.PAGES, Feature.PER_PLAYER)) {
-                if (!on(needed)) { lang.send(player, "feature-needs", "switch", needed.path); return; }
+                if (!on(needed)) { lang.send(player, "feature-needs", "switch", needed.path, "name", lang.plain(player, needed.label())); return; }
             }
             if (!navigation.navigate(board, player.getUniqueId(), area.navigate(), now)) {
                 lang.send(player, "navigation-invalid");
@@ -1145,6 +1164,7 @@ public final class BoardsPlugin extends JavaPlugin implements Listener {
 
     void reload(CommandSender sender) {
         load();
+        if (configProblem != null) { lang.send(sender, "config-broken", "file", "config.yml", "problem", configProblem); return; }
         lang.send(sender, "reloaded", "count", Integer.toString(boards.size()));
     }
 

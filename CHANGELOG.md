@@ -1,3 +1,10 @@
+## 1.19.1 — 2026-11-20
+
+- `/boards reload` with a YAML syntax error in `config.yml` keeps the last working settings and boards instead of falling back to the defaults, and answers with the line and column of the error (also shown in the console, as on start). The file is never changed.
+- `/vadmin features` shows every switch of the plugin with a readable name in the admin's language, for example "Poll deadlines" and "Offline statistics for rankings", instead of a name built from the config key such as "Leaderboards › Seed offline stats". The names exist in all seven languages.
+- A page button on a board that needs `pages.enabled` or `per-player.enabled` now names the switch in full, for example "This needs “Rotating pages” (pages.enabled), which is switched off on this server."
+- README: names the platforms the plugin was tested on (Paper and Purpur 26.2, Paper 1.20.6, Spigot 26.2).
+
 ## 1.19.0 — 2026-11-18
 
 - Requires Vystorm Core 0.65.0 or newer. Update Core before you update this plugin.
